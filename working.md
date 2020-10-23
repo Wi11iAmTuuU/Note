@@ -96,32 +96,33 @@
 1. 研究ingress連線問題
 2. 研究Cilium
 ### 四
-
+1. 研究ingress連線問題
+2. 研究IngressClass
 ### 五
 
 
 **Tmep**
-1. 研究ingress連線問題
-2. 研究IngressClass
-3. 規劃前後端分離小專案
+1. 研究ingress path問題
+2. 研究RBAC
+3. 規劃前後端分離小專案(之後要部屬於kubernetes)
 
 **待做項目**
 研究pod issue解決方案
 **研究service與pod不通之解決方法**
 研究calico
-研究nginx-ingress
+研究ingress-nginx
 
 
 ---
 
-Hi All (2020-10-22):
+Hi All (2020-10-23):
 1. 昨天進行的項目:
     1.1 研究ingress連線問題
-    1.2 研究Cilium
+    1.2 研究IngressClass
 2. 今天預計進行的項目:
-    2.1 繼續研究ingress連線問題
-    2.2 研究IngressClass
-    2.3 規劃前後端分離小專案(之後要部屬於kubernetes)
+    2.1 研究ingress path問題
+    2.2 研究RBAC
+    2.3 規劃前後端分離小專案(部屬上k8s)
 3. 待解決問題:
     3.1 無
     
