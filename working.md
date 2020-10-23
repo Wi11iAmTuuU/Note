@@ -99,7 +99,9 @@
 1. 研究ingress連線問題
 2. 研究IngressClass
 ### 五
-
+1. 研究ingress path問題
+2. 研究RBAC
+3. 研究在kubernetes上如何運用nginx連接前後端
 
 **Tmep**
 1. 研究ingress path問題
@@ -128,12 +130,13 @@ Hi All (2020-10-23):
     
 ---
 
-Hi All (2020-10-19):
+Hi All (2020-10-26):
 1. 上周五進行的項目:
-    1.1 研究pod issue解決方案
-    1.2 研究calico
+    1.1 研究ingress path問題
+    1.2 研究RBAC
+    1.3 研究如何在kubernetes上運用nginx連接前後端
 2. 今天預計進行的項目:
-    2.1 研究calico
-    2.2 研究ingress
+    2.1 
+    2.2 
 3. 待解決問題:
     3.1 無
