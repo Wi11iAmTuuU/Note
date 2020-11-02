@@ -9,14 +9,25 @@ vue.js
 ---
 ## 後端
 ### 後端框架
-Django
+Flsak
 ### 使用語言
 python
 ### API說明
+**markdown:**
+GET: /api/markdown
+取得markdown內容
+
+POST:
+修改markdown內容
+
+**contact us:**
+POST:
+傳送email內容
 
 ---
 ## 注意
-使用nginx架設前端，若要連接後端則要修改default.conf
+![](https://i.imgur.com/5OKK9KM.png)
+若要在kubernetes使用nginx架設前端連接後端則要修改default.conf
 ```
 upstream [後端service名稱]{
      server [後端service名稱];
