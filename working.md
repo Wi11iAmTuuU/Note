@@ -121,45 +121,61 @@
 2. 撰寫小專案
 ## 第八禮拜
 ### 一
-
+1. 研究vue
+2. 研究flask
+3. 撰寫小專案
 ### 二
-
+1. 研究vue
+2. 研究python smtplib
+3. 撰寫小專案
 ### 三
-
+1. 研究vue
+2. 撰寫小專案
 ### 四
-
+1. 將小專案建成容器化image
+2. 撰寫佈署相關YAML
+3. 將小專案佈署上Kubernetes
 ### 五
+1. 研究ingress-nginx-controller
+2. 修正小專案部分issue
 
 
 **Tmep**
-1. 研究vue
-2. 撰寫小專案
+
 
 **待做項目**
-研究pod issue解決方案
-**研究service與pod不通之解決方法**
-研究calico
-研究ingress-nginx
+**nginx-ingress**(deadline:11/23報告)
+**nginx-ingress-plus**(deadline:11/23報告)
+kong-ingress
+haproxy(12月初開始)
+OCP(12月初開始)
+kubernetes網路(之後研究重點)
 
+PPT呈現要完整 從最開始安裝到整個架構(架構圖包含port)
 
 ---
 
-Hi All (2020-10-30):
+Hi All (2020-11-6):
 1. 昨天進行的項目:
-    1.1 研究vue
-    1.2 撰寫小專案
+    1.1 將小專案建成容器化image
+    1.2 撰寫佈署相關YAML
+    1.3 將小專案佈署上Kubernetes
+    1.4 研究ingress-nginx-controller
 2. 今天預計進行的項目:
-    2.1 撰寫小專案
+    2.1 研究smtp connection timeout問題
+    2.2 研究ingress-nginx-controller
+    2.3 研究troubleshooting SOP
 3. 待解決問題:
     3.1 無
     
 ---
 
-Hi All (2020-11-2):
+Hi All (2020-11-9):
 1. 上周五進行的項目:
-    1.1 研究vue
-    1.2 撰寫小專案
+    1.1 研究ingress-nginx-controller
+    1.2 修正小專案部分issue
 2. 今天預計進行的項目:
-    2.1 撰寫小專案
+    2.1 研究nginx-ingress
+    2.2 研究nginx-ingress plus
 3. 待解決問題:
     3.1 無
