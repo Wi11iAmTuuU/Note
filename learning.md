@@ -71,8 +71,8 @@ Kubernetes的最基本單位，一個Pod包含一個或多個Container，可以�
 **Ingress**
 配置提供外部可訪問的URL、負載均衡、SSL、基於名稱的虛擬主機。
 ![](https://i.imgur.com/knEc3Ka.png)
-需要安裝ingress-nginx，當部屬完igress後需要改動hosts讓瀏覽器辨別網址及IP Address。
-若使用helm安裝git上的ingress-nginx，需在ingress-nginx-controler上增加externalIPs。
+需要安裝ingress-nginx，若使用helm安裝git上的ingress-nginx，需在ingress-nginx-controler上增加externalIPs。
+[詳細內容請點擊此連結](https://hackmd.io/@williamtuuu/B16e68IFw)
 **DaemonSet**
 確保每個Node都有運行一個特定Pod，當新增Node時，會在新Node部屬特定Pod，也可限制在指定Node部屬特定Pod。
 典型用法為建立log收集及監控等等，例如:
@@ -883,4 +883,3 @@ https://www.kubernetes.org.cn/4960.html
 https://helm.sh/
 * **Prometheus官方**
 https://prometheus.io/
->我超帥[name=albert.tu]
