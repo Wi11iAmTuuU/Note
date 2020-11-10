@@ -138,10 +138,25 @@
 ### 五
 1. 研究ingress-nginx-controller
 2. 修正小專案部分issue
+## 第九禮拜
+### 一
+1. NGINX-ingress Overview
+2. 研究NGINX-ingress & NGINX-ingress plus差異
+### 二
+1. 研究NGINX-ingress & NGINX-ingress plus差異
+2. 研究VirtualServer和VirtualServerRoute
+3. 研究nginx-ingress-controller安裝方法
+### 三
+
+### 四
+
+### 五
 
 
 **Tmep**
-
+1. 研究NGINX-ingress & NGINX-ingress plus差異
+2. 研究VirtualServer和VirtualServerRoute
+3. 研究nginx-ingress-controller安裝方法
 
 **待做項目**
 **nginx-ingress**(deadline:11/23報告)
@@ -155,16 +170,14 @@ PPT呈現要完整 從最開始安裝到整個架構(架構圖包含port)
 
 ---
 
-Hi All (2020-11-6):
+Hi All (2020-11-11):
 1. 昨天進行的項目:
-    1.1 將小專案建成容器化image
-    1.2 撰寫佈署相關YAML
-    1.3 將小專案佈署上Kubernetes
-    1.4 研究ingress-nginx-controller
+    1.1 研究NGINX-ingress & NGINX-ingress plus差異
+    1.2 研究VirtualServer和VirtualServerRoute
+    1.3 研究nginx-ingress-controller安裝方法
 2. 今天預計進行的項目:
-    2.1 研究smtp connection timeout問題
-    2.2 研究ingress-nginx-controller
-    2.3 研究troubleshooting SOP
+    2.1 研究NGINX-ingress/NGINX-ingress plus
+    2.2 下午參加SMO會議
 3. 待解決問題:
     3.1 無
     
