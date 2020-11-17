@@ -1,5 +1,14 @@
 # Ingress
-# NGINX-ingress/NGINX-ingress plus
+## 名詞說明
+Ingress Class: 當單一叢集擁有多個ingress controller時，用來定義controller名字，方便啟用ingress時，連接正確的ingress controller。
+pathTpe: 
+* ImplementationSpecific: 根據IngressClass
+* Exact: URL必須相同
+* Prefix: 以/分隔URL，只要/前的路徑有匹配即可
+
+Deployment: 如果想動態改變Ingress controller replicas數量，缺點若replica數量開不夠造成有些node上沒有controller會影響到有些pod無法被連到。
+DaemonSet: 在每個node上部署Ingress controller
+
 ## NGINX-ingress/NGINX-ingress plus差異
 
 |                                                                               | nginxinc/kubernetes-ingress with NGINX | nginxinc/kubernetes-ingress with NGINX Plus |
@@ -67,8 +76,6 @@ spec:
 ```
 
 ## 安裝
-Deployment: 如果想動態改變Ingress controller replicas數量
-DaemonSet: 在每個node上部署Ingress controller
 ### 手動安裝
 **預先處理**
 安裝NGINX Ingress controller:使用DockerHub上的nginx/nginx-ingress image
