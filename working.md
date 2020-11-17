@@ -147,16 +147,30 @@
 2. 研究VirtualServer和VirtualServerRoute
 3. 研究nginx-ingress-controller安裝方法
 ### 三
+1. 研究NGINX-ingress & NGINX-ingress plus
+   -Advanced Configuration with Annotations
+2. SMO會議
+### 四
+1. 安裝NGINX-ingress
+2. 研究ingress class
+### 五
+1. 研究NGINX-ingress部屬參數
+2. 研究ingress class
+## 第十禮拜
+### 一
+
+### 二
+
+### 三
 
 ### 四
 
 ### 五
 
-
 **Tmep**
-1. 研究NGINX-ingress & NGINX-ingress plus差異
-2. 研究VirtualServer和VirtualServerRoute
-3. 研究nginx-ingress-controller安裝方法
+1. 研究NGINX-ingress部屬參數
+2. 研究ingress pathType
+3. 調整NGINX-ingress-controller配置並成功連上虛擬機中k8s部屬的小專案
 
 **待做項目**
 **nginx-ingress**(deadline:11/23報告)
@@ -165,30 +179,31 @@ kong-ingress
 haproxy(12月初開始)
 OCP(12月初開始)
 kubernetes網路(之後研究重點)
+Argo(kubernetes視覺化workflow) 有空研究
 
 PPT呈現要完整 從最開始安裝到整個架構(架構圖包含port)
 
+**測試使用daemonset不設externalIPs 看看ingress部屬上的address是啥**
+
 ---
 
-Hi All (2020-11-11):
+Hi All (2020-11-17):
 1. 昨天進行的項目:
-    1.1 研究NGINX-ingress & NGINX-ingress plus差異
-    1.2 研究VirtualServer和VirtualServerRoute
-    1.3 研究nginx-ingress-controller安裝方法
+    1.1 研究NGINX-ingress部屬參數
+    1.2 研究ingress pathType
+    1.3 調整NGINX-ingress-controller配置並成功連上虛擬機中k8s部屬的小專案
 2. 今天預計進行的項目:
-    2.1 研究NGINX-ingress/NGINX-ingress plus
-    2.2 下午參加SMO會議
+    2.1 研究NGINX-ingress plus image Building 方式
 3. 待解決問題:
     3.1 無
     
 ---
 
-Hi All (2020-11-9):
+Hi All (2020-11-16):
 1. 上周五進行的項目:
-    1.1 研究ingress-nginx-controller
-    1.2 修正小專案部分issue
+    1.1 研究NGINX-ingress部屬參數
+    1.2 研究ingress class
 2. 今天預計進行的項目:
-    2.1 研究nginx-ingress
-    2.2 研究nginx-ingress plus
+    2.1 研究NGINX-ingress/NGINX-ingress plus
 3. 待解決問題:
     3.1 無
