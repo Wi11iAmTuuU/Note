@@ -158,9 +158,13 @@
 2. 研究ingress class
 ## 第十禮拜
 ### 一
-
+1. 研究NGINX-ingress部屬參數
+2. 研究ingress pathType
+3. 調整NGINX-ingress-controller配置並成功連上虛擬機中k8s部屬的小專案
 ### 二
-
+1. 研究NGINX-ingress plus Building Image方式
+2. 部屬NGINX-ingress plus
+3. 研究NGINX-ingress plus附加功能
 ### 三
 
 ### 四
@@ -168,9 +172,9 @@
 ### 五
 
 **Tmep**
-1. 研究NGINX-ingress部屬參數
-2. 研究ingress pathType
-3. 調整NGINX-ingress-controller配置並成功連上虛擬機中k8s部屬的小專案
+1. 
+2.
+
 
 **待做項目**
 **nginx-ingress**(deadline:11/23報告)
@@ -187,13 +191,14 @@ PPT呈現要完整 從最開始安裝到整個架構(架構圖包含port)
 
 ---
 
-Hi All (2020-11-17):
+Hi All (2020-11-18):
 1. 昨天進行的項目:
-    1.1 研究NGINX-ingress部屬參數
-    1.2 研究ingress pathType
-    1.3 調整NGINX-ingress-controller配置並成功連上虛擬機中k8s部屬的小專案
+    1.1 研究NGINX-ingress plus
+    - Building Image方式
+    - 部屬NGINX-ingress plus
+    - 研究NGINX-ingress plus附加功能
 2. 今天預計進行的項目:
-    2.1 研究NGINX-ingress plus image Building 方式
+    2.1 研究NGINX-ingress/NGINX-ingress plus
 3. 待解決問題:
     3.1 無
     
