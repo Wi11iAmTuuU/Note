@@ -436,8 +436,15 @@ sudo docker run hello-world
 ### kubelet kubectl kubeadm一起安裝
 **關閉swap**
 ```
-swapoff -a && sysctl -w vm.swappiness=0
-sed '/swap.img/d' -i  /etc/fstab
+$ swapoff -a && sysctl -w vm.swappiness=0
+$ sed '/swap.img/d' -i  /etc/fstab
+```
+**關閉防火牆及SElinux(CentOS)**
+```
+$ systemctl stop firewalld && systemctl disable firewalld
+$ setenforce 0
+$ vim /etc/selinux/config
+SELINUX=disabled
 ```
 **安裝**
 ```
@@ -451,10 +458,6 @@ repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 exclude=kubelet kubeadm kubectl
 EOF
-
-# Set SELinux in permissive mode (effectively disabling it)
-sudo setenforce 0
-sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
 sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 
