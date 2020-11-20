@@ -166,9 +166,12 @@
 2. 部屬NGINX-ingress plus
 3. 研究NGINX-ingress plus附加功能
 ### 三
-
+1. 研究deployment/daemonset部署ingress-controller差異
+2. 研究NGINX-ingress部屬參數
 ### 四
-
+1. 研究NGINX-ingress/NGINX-ingress plus Troubleshooting
+2. 規劃NGINX-ingress/NGINX-ingress plus PPT
+3. 研究OCP clusterrole/role
 ### 五
 
 **Tmep**
@@ -187,18 +190,21 @@ Argo(kubernetes視覺化workflow) 有空研究
 
 PPT呈現要完整 從最開始安裝到整個架構(架構圖包含port)
 
-**測試使用daemonset不設externalIPs 看看ingress部屬上的address是啥**
-
 ---
 
-Hi All (2020-11-18):
+Hi All (2020-11-20):
 1. 昨天進行的項目:
-    1.1 研究NGINX-ingress plus
-    - Building Image方式
-    - 部屬NGINX-ingress plus
-    - 研究NGINX-ingress plus附加功能
+    1.1 研究NGINX-ingress/NGINX-ingress plus
+        - Troubleshooting
+        - 規劃PPT
+    1.2 研究OCP
+        - clusterrole/role
+        - 針對namespaces調整使用者權限
 2. 今天預計進行的項目:
-    2.1 研究NGINX-ingress/NGINX-ingress plus
+    2.1 研究OCP
+        - clusterrole/role
+        - 針對namespaces調整使用者權限
+    2.2 研究NGINX-ingress plus Dashboard如何以外部網路開啟
 3. 待解決問題:
     3.1 無
     
