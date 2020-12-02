@@ -1,15 +1,16 @@
 # Ingress
-## 名詞說明
+## NGINX-ingress
+### 名詞說明
 Ingress Class: 當單一叢集擁有多個ingress controller時，用來定義controller名字，方便啟用ingress時，連接正確的ingress controller。
 pathTpe: 
 * ImplementationSpecific: 根據IngressClass
 * Exact: URL必須相同
 * Prefix: 以/分隔URL，只要/前的路徑有匹配即可
 
-Deployment: 如果想動態改變Ingress controller replicas數量，缺點若replica數量開不夠造成有些node上沒有controller會影響到有些pod無法被連到。
+Deployment: 如果想動態改變Ingress controller replicas數量
 DaemonSet: 在每個node上部署Ingress controller
 
-## NGINX-ingress/NGINX-ingress plus差異
+### NGINX-ingress/NGINX-ingress plus差異
 
 |                                                                               | nginxinc/kubernetes-ingress with NGINX | nginxinc/kubernetes-ingress with NGINX Plus |
 | ----------------------------------------------------------------------------- |:--------------------------------------:|:-------------------------------------------:|
@@ -28,8 +29,8 @@ DaemonSet: 在每個node上部署Ingress controller
 | 動態重新配置endpoints                                                         |                 不支援                 |                    支援                     |
 | JSON Web Tokens驗證                                                           |                 不支援                 |                    支援                     |
 | Session persistence                                                           |                 不支援                 |                    支援                     | 
-| 即時監控                                                                      |                 不支援                 |                    支援                     |
-## 名詞說明
+
+### 名詞說明
 **VirtualServer:** 用來定義load balance構造
 ```
 apiVersion: k8s.nginx.org/v1
@@ -75,8 +76,8 @@ spec:
       pass: espresso
 ```
 
-## 安裝
-### 手動安裝
+### 安裝
+#### **手動安裝**
 **預先處理**
 安裝NGINX Ingress controller:使用DockerHub上的nginx/nginx-ingress image
 安裝NGINX Plus Ingress controller:建構自己的image並推到私人的Docker registry，方法起參考此[連結](https://docs.nginx.com/nginx-ingress-controller/installation/building-ingress-controller-image/)
@@ -169,7 +170,7 @@ $ kubectl create -f service/nodeport.yaml
 $ kubectl apply -f service/loadbalancer.yaml
 ```
 
-### 經由helm3
+#### **經由helm3**
 ```
 $ helm repo add nginx-stable https://helm.nginx.com/stable
 $ helm repo update
@@ -180,9 +181,33 @@ $ helm install [名稱] nginx-stable/nginx-ingress
 ```
 NGINX Plus:
 ```
-$ helm install [名稱] nginx-stable/nginx-ingress --set controller.image.repository=myregistry.example.com/nginx-plus-ingress --set controller.nginxplus=true
+$ helm install [名稱] nginx-stable/nginx-ingress --set controller.image.repository=[image位址] --set controller.nginxplus=true
 ```
+### NGINX-Plus Dashboard如何開啟
+#### **Port Forward**
+```
+kubectl port-forward <nginx-plus-ingress-pod> 8080:8080 --namespace=nginx-ingress
+```
+虛擬機中轉發至 http://127.0.0.1:8080/dashboard.html
+#### **白名單**
+修改controller deployment中nginx-status-allow-cidrs為要連接dashboard的網段
+```
+- -nginx-status=true
+- -nginx-status-port=8080
+- -nginx-status-allow-cidrs=10.8.4.0/24
+- -report-ingress-status
+```
+在controller service中新增status port為deployment中status-port
+```
+- name: dashboard
+  port: 8080
+  protocol: TCP
+  targetPort: 8080
+```
+連上該controller externalIP加剛開的port/dashboard.html
+ex: 10.255.78.34:8080/dashboard.html
 
+## Kong-ingress
 
 # 資料來源
 * NGINX-ingress doc 
