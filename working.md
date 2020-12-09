@@ -147,8 +147,7 @@
 2. 研究VirtualServer和VirtualServerRoute
 3. 研究nginx-ingress-controller安裝方法
 ### 三
-1. 研究NGINX-ingress & NGINX-ingress plus
-   -Advanced Configuration with Annotations
+1. 研究NGINX-ingress & NGINX-ingress plus Annotations
 2. SMO會議
 ### 四
 1. 安裝NGINX-ingress
@@ -173,6 +172,50 @@
 2. 規劃NGINX-ingress/NGINX-ingress plus PPT
 3. 研究OCP clusterrole/role
 ### 五
+1. 研究OCP clusterrole/role
+2. 研究NGINX-ingress plus Dashboard
+3. 參加課程"知己知彼的人際風格互動"
+## 第十一禮拜
+### 一
+1. 研究NGINX-ingress plus Dashboard
+### 二
+1. 研究NGINX-ingress plus Dashboard
+### 三
+1. 研究NGINX-ingress plus Dashboard
+### 四
+1. 研究NGINX-ingress plus Dashboard
+2. 研究CIDR
+### 五
+1. 研究NGINX-ingress plus Dashboard
+2. 研究Kong ingress controller
+## 第十二禮拜
+### 一
+1. 研究NGINX-ingress plus access Dashboard externally
+2. 研究Kong ingress controller
+### 二
+1. 研究NGINX-ingress plus access Dashboard externally
+### 三
+1. 研究NGINX-ingress plus access Dashboard externally
+2. 研究Kong ingress controller
+### 四
+1. 研究Kong ingress controller Introduction
+2. 研究Kong ingress controller helm3 部屬參數
+### 五
+1. 研究Kong ingress controller helm3 部屬參數
+2. 研究Kong ingress controller Custom Resources
+## 第十三禮拜
+### 一
+1. 研究Kong ingress controller KongIngress
+### 二
+1. 研究Kong ingress controller KongIngress
+2. 研究Kong ingress controller KongPlugin
+3. 研究Kong ingress readinessProbe及livenessProbe無法正常部屬解決方法
+### 三
+
+### 四
+
+### 五
+
 
 **Tmep**
 1. 
@@ -180,41 +223,46 @@
 
 
 **待做項目**
-**nginx-ingress**(deadline:11/23報告)
-**nginx-ingress-plus**(deadline:11/23報告)
+nginx-ingress
+nginx-ingress-plus
 kong-ingress
 haproxy(12月初開始)
 OCP(12月初開始)
 kubernetes網路(之後研究重點)
 Argo(kubernetes視覺化workflow) 有空研究
+ServiceMesh
 
 PPT呈現要完整 從最開始安裝到整個架構(架構圖包含port)
 
 ---
 
-Hi All (2020-11-20):
+Hi All (2020-12-09):
 1. 昨天進行的項目:
-    1.1 研究NGINX-ingress/NGINX-ingress plus
-        - Troubleshooting
-        - 規劃PPT
-    1.2 研究OCP
-        - clusterrole/role
-        - 針對namespaces調整使用者權限
+    1.1 研究Kong ingress controller
+        - Custom Resources
+          - KongIngress
+          - KongPlugin
+    1.2 研究Kong ingress Pod中readinessProbe及livenessProbe 連接/healthz時connection refused並不斷重啟原因
 2. 今天預計進行的項目:
-    2.1 研究OCP
-        - clusterrole/role
-        - 針對namespaces調整使用者權限
-    2.2 研究NGINX-ingress plus Dashboard如何以外部網路開啟
+    2.1 研究Kong ingress controller
+        - Custom Resources
+          - KongIngress
+          - KongPlugin
+    2.2 研究Kong ingress Pod中readinessProbe及livenessProbe 連接/healthz時connection refused並不斷重啟原因
 3. 待解決問題:
     3.1 無
     
 ---
 
-Hi All (2020-11-16):
+Hi All (2020-12-07):
 1. 上周五進行的項目:
-    1.1 研究NGINX-ingress部屬參數
-    1.2 研究ingress class
+    1.1 研究Kong ingress controller
+        - helm3 部屬參數
+        - Custom Resources
 2. 今天預計進行的項目:
-    2.1 研究NGINX-ingress/NGINX-ingress plus
+    2.1 研究Kong ingress controller
+        - Custom Resources
+          - KongIngress
+          - KongPlugin
 3. 待解決問題:
-    3.1 無
+    3.1 用helm3部屬Kong ingress controller時，pod Unhealthy並無限重啟
