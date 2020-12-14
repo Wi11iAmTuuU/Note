@@ -211,10 +211,26 @@
 2. 研究Kong ingress controller KongPlugin
 3. 研究Kong ingress readinessProbe及livenessProbe無法正常部屬解決方法
 ### 三
+1. 研究Kong ingress controller KongPlugin
+2. 研究Kong ingress readinessProbe及livenessProbe無法正常部屬解決方法
+### 四
+1. 研究Kong ingress controller KongIngress
+2. 研究Kong ingress controller KongPlugin
+### 五
+1. 研究Kong ingress controller各版本差異
+2. 研究Kong ingress controller KongIngress
+3. 研究Kong ingress readinessProbe及livenessProbe無法正常部屬解決方法
+## 第十四禮拜
+### 一
+
+### 二
+
+### 三
 
 ### 四
 
 ### 五
+
 
 
 **Tmep**
@@ -236,15 +252,15 @@ PPT呈現要完整 從最開始安裝到整個架構(架構圖包含port)
 
 ---
 
-Hi All (2020-12-09):
+Hi All (2020-12-11):
 1. 昨天進行的項目:
     1.1 研究Kong ingress controller
         - Custom Resources
-          - KongIngress
           - KongPlugin
-    1.2 研究Kong ingress Pod中readinessProbe及livenessProbe 連接/healthz時connection refused並不斷重啟原因
+          - KongIngress
 2. 今天預計進行的項目:
     2.1 研究Kong ingress controller
+        - 各版本差異
         - Custom Resources
           - KongIngress
           - KongPlugin
@@ -254,15 +270,19 @@ Hi All (2020-12-09):
     
 ---
 
-Hi All (2020-12-07):
+Hi All (2020-12-14):
 1. 上周五進行的項目:
     1.1 研究Kong ingress controller
-        - helm3 部屬參數
-        - Custom Resources
-2. 今天預計進行的項目:
-    2.1 研究Kong ingress controller
+        - 各版本差異
         - Custom Resources
           - KongIngress
-          - KongPlugin
+    1.2 研究Kong ingress Pod中readinessProbe及livenessProbe 連接/healthz時connection refused並不斷重啟原因
+2. 今天預計進行的項目:
+    2.1 研究Kong ingress controller
+        - 整理各版本差異
+        - Custom Resources
+          - KongIngress
+          - KongConsumer
+    2.2 研究Kong ingress Pod中readinessProbe及livenessProbe 連接/healthz時connection refused並不斷重啟原因
 3. 待解決問題:
-    3.1 用helm3部屬Kong ingress controller時，pod Unhealthy並無限重啟
+    3.1 無
