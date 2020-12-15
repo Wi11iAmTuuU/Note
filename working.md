@@ -222,7 +222,9 @@
 3. 研究Kong ingress readinessProbe及livenessProbe無法正常部屬解決方法
 ## 第十四禮拜
 ### 一
-
+1. 研究Kong ingress controller 整理各版本差異
+2. 研究Kong ingress controller KongIngress
+3. 研究Kong ingress controller KongConsumer
 ### 二
 
 ### 三
@@ -252,19 +254,20 @@ PPT呈現要完整 從最開始安裝到整個架構(架構圖包含port)
 
 ---
 
-Hi All (2020-12-11):
+Hi All (2020-12-15):
 1. 昨天進行的項目:
     1.1 研究Kong ingress controller
+        - 整理各版本差異
         - Custom Resources
-          - KongPlugin
           - KongIngress
+          - KongConsumer
+    1.2 使用官方提供的yaml檔部屬kong for kubernetes
 2. 今天預計進行的項目:
     2.1 研究Kong ingress controller
-        - 各版本差異
         - Custom Resources
           - KongIngress
-          - KongPlugin
-    2.2 研究Kong ingress Pod中readinessProbe及livenessProbe 連接/healthz時connection refused並不斷重啟原因
+          - TCPIngress
+    2.2 嘗試修改kong官方yaml(namespace,tolerations,nodeSelector,externalIPs)
 3. 待解決問題:
     3.1 無
     
