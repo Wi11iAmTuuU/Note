@@ -1,4 +1,6 @@
 # Ingress
+![](https://i.imgur.com/p7FoIV9.png)
+
 ## NGINX-ingress
 ### 名詞說明
 Ingress Class: 當單一叢集擁有多個ingress controller時，用來定義controller名字，方便啟用ingress時，連接正確的ingress controller。
@@ -171,6 +173,7 @@ $ kubectl apply -f service/loadbalancer.yaml
 ```
 
 #### **經由helm3**
+加入repo並更新
 ```
 $ helm repo add nginx-stable https://helm.nginx.com/stable
 $ helm repo update
@@ -208,7 +211,83 @@ kubectl port-forward <nginx-plus-ingress-pod> 8080:8080 --namespace=nginx-ingres
 ex: 10.255.78.34:8080/dashboard.html
 
 ## Kong-ingress
+### 簡介
+Kong-ingress有企業版與社群版，主要優點為擁有大量插件及客製化內容。
+客製化內容:
+- KongPlugin: 有企業版與社群版等插件庫輔助kong。
+- KongClusterPlugin: 與KongPlugin功能相同，但對應給整個Cluster，若與KongPlugin有相衝突，以KongPlugin為優先。
+- KongIngress: 針對Ingress及Service進行擴展，針對Ingress有route可以設置，針對Service有upstream及proxy可以設置。
+- KongConsumer: 設定用戶，可以針對該用戶使用客製化內容。
+- TCPIngress: 使用kong將non-HTTP and non-GRPC services暴露到外部。
+
+有支援stick session但須透過kongingress的upstream。
+### 版本差異
+
+|                          | kong for kubernetes | kong for kubernetes DB-less |      Kong for Kubernetes Enterprise      | Kong Enterprise on Kubernetes |
+|:------------------------:|:-------------------:|:---------------------------:|:----------------------------------------:|:-----------------------------:|
+|       kong version       |        kong         |            kong             |             Kong Enterprise              |        Kong Enterprise        |
+|         Database         |      postgres       |           DB-less           |                 DB-less                  |     postgres or cassandra     |
+|   open-source plugins    |          O          |         缺少oauth2          |                缺少oauth2                |               O               |
+|    Enterprise plugins    |          X          |              X              |              缺少少部分插件              |               O               |
+| Kong Enterprise features |          X          |              X              | 缺少Kong Manager, Dev Portal, Vitals等等 |               O               |
+### kongingress
+- route:
+  - headers:
+  - https_redirect_status_code:
+  - methods:
+  - path_handling:
+  - preserve_host:
+  - protocols:
+  - regex_priority:
+  - snis:
+  - strip_path:
+- upstream: 
+  - algorithm: 
+  - hash_fallback:
+  - hash_fallback_header:
+  - hash_on:
+  - hash_on_cookie:
+  - hash_on_cookie_path:
+  - hash_on_header:
+  - healthchecks:
+  - host_header:
+  - slots:
+- proxy: 
+  - connect_timeout:
+  - path:
+  - protocol:
+  - read_timeout:
+  - retries:
+  - write_timeout:
+### 安裝(經由官方yaml)
+```
+$ kubectl apply -f https://bit.ly/kong-ingress-dbless
+```
+### 安裝(經由helm)
+加入repo並更新
+```
+$ helm repo add kong https://charts.konghq.com
+$ helm repo update
+```
+安裝(helm3+會自動偵測並安裝CRDs,所以給false)
+```
+$ helm install kong/kong --generate-name --set ingressController.installCRDs=false
+```
+helm charts參數[請點此連結](https://github.com/Kong/charts/blob/main/charts/kong/README.md)
+### 假想
+新增一台新的WorkerNode並下汙點
+安裝kong-ingress時 參數下namespace,installCRDs=false,externalIPs,nodeSelecter,tolerations,autoScaling
+```
+helm install kong kong/kong -n ingress-controller --set ingressController.installCRDs=false --set SVC.externalIPs={10.255.78.34} --set autoscaling.enabled=true --set nodeSelector.feature=ingress-controller --set tolerations[0].key=ingress-controller --set tolerations[0].operator=Exists --set tolerations[0].effect=NoSchedule
+```
+
 
 # 資料來源
-* NGINX-ingress doc 
+- NGINX-ingress doc 
 https://docs.nginx.com/nginx-ingress-controller/
+- NGINX-ingress github
+https://github.com/nginxinc/kubernetes-ingress/
+- Kong-ingress doc
+https://docs.konghq.com/kubernetes-ingress-controller/1.0.x/introduction/
+- Kong-ingress github
+https://github.com/Kong/kubernetes-ingress-controller
