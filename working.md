@@ -226,6 +226,23 @@
 2. 研究Kong ingress controller KongIngress
 3. 研究Kong ingress controller KongConsumer
 ### 二
+1. 研究Kong ingress controller KongIngress
+2. 研究Kong ingress controller TCPIngress
+3. 研究Kong for kubernetes helm chart 
+### 三
+1. OCP教育訓練
+### 四
+1. 研究Kong ingress controller helm chart
+2. 修改Kong ingress controller 官方all-in-one yaml並佈署上k8s
+### 五
+1. 研究Kong ingress controller 使用helm安裝異常原因
+2. 整理Kong ingress controller相關資訊
+## 第十五禮拜
+### 一
+1. 研究Kong ingress controller KongIngress
+2. 整理Kong ingress controller相關資訊
+3. 研究NGINX-ingress TCP功能
+### 二
 
 ### 三
 
@@ -239,10 +256,11 @@
 1. 
 2.
 
-
-**待做項目**
+## 暫定結束項目
 nginx-ingress
 nginx-ingress-plus
+
+## 待做項目
 kong-ingress
 haproxy(12月初開始)
 OCP(12月初開始)
@@ -250,42 +268,36 @@ kubernetes網路(之後研究重點)
 Argo(kubernetes視覺化workflow) 有空研究
 ServiceMesh
 
-PPT呈現要完整 從最開始安裝到整個架構(架構圖包含port)
+## 12/21開會
+nginx-ingress是否有TCPIngress類似功能
 
 ---
 
-Hi All (2020-12-15):
+Hi All (2020-12-22):
 1. 昨天進行的項目:
     1.1 研究Kong ingress controller
-        - 整理各版本差異
-        - Custom Resources
-          - KongIngress
-          - KongConsumer
-    1.2 使用官方提供的yaml檔部屬kong for kubernetes
+        - KongIngress
+        - 整理kong相關資訊
+    1.2 研究NGINX-ingress TCP功能
 2. 今天預計進行的項目:
     2.1 研究Kong ingress controller
-        - Custom Resources
-          - KongIngress
-          - TCPIngress
-    2.2 嘗試修改kong官方yaml(namespace,tolerations,nodeSelector,externalIPs)
+        - KongIngress
+        - 整理kong相關資訊
+    2.2 研究NGINX-ingress TCP功能
 3. 待解決問題:
     3.1 無
     
 ---
 
-Hi All (2020-12-14):
+Hi All (2020-12-21):
 1. 上周五進行的項目:
     1.1 研究Kong ingress controller
-        - 各版本差異
-        - Custom Resources
-          - KongIngress
-    1.2 研究Kong ingress Pod中readinessProbe及livenessProbe 連接/healthz時connection refused並不斷重啟原因
+        - 研究使用helm安裝異常原因
+        - 整理kong相關資訊
 2. 今天預計進行的項目:
     2.1 研究Kong ingress controller
-        - 整理各版本差異
-        - Custom Resources
-          - KongIngress
-          - KongConsumer
-    2.2 研究Kong ingress Pod中readinessProbe及livenessProbe 連接/healthz時connection refused並不斷重啟原因
+        - 研究TCPIngress
+        - 研究使用helm安裝異常原因
+        - 整理kong相關資訊
 3. 待解決問題:
     3.1 無
