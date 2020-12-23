@@ -243,7 +243,8 @@
 2. 整理Kong ingress controller相關資訊
 3. 研究NGINX-ingress TCP功能
 ### 二
-
+1. 研究Kong ingress controller KongIngress
+2. 整理Kong ingress controller相關資訊
 ### 三
 
 ### 四
@@ -273,17 +274,17 @@ nginx-ingress是否有TCPIngress類似功能
 
 ---
 
-Hi All (2020-12-22):
+Hi All (2020-12-23):
 1. 昨天進行的項目:
     1.1 研究Kong ingress controller
         - KongIngress
         - 整理kong相關資訊
-    1.2 研究NGINX-ingress TCP功能
 2. 今天預計進行的項目:
     2.1 研究Kong ingress controller
-        - KongIngress
+        - 與NGINX差異性
         - 整理kong相關資訊
-    2.2 研究NGINX-ingress TCP功能
+    2.2 研究NGINX-ingress controller
+        - TransportServer 
 3. 待解決問題:
     3.1 無
     
