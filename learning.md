@@ -114,6 +114,14 @@ CronJob就是定時執行的job。
 **Taint & Toleration**
 taint設計讓pod不要被分派到特定Worker Node
 Toleration設計讓pod分派到某個特定被Taint過的Worker Node上
+kubernetes內建taint
+- node.kubernetes.io/not-ready :Node is not ready
+- node.kubernetes.io/unreachable :Node controller 無法聯繫到該 node
+- node.kubernetes.io/out-of-disk :Node磁碟空間不足
+- node.kubernetes.io/memory-pressure :Node記憶體快要耗盡
+- node.kubernetes.io/disk-pressure :Node磁碟空間快要耗盡
+- node.kubernetes.io/network-unavailable :Node網路有問題
+- node.kubernetes.io/unschedulable :無法分派 pod 到該 node
 ### yaml檔說明
 **apiVersion**
 Kubernetes Api版本。
@@ -399,6 +407,10 @@ status:
         averageUtilization: 0
         averageValue: 0
 ```
+**進入container bash**
+```
+$ kubectl exec -it [pod name] -n [pod namespace] -- bash
+```
 ## 環境安裝(安裝kubeadm在CentOS上為例)
 ### 必備資源
 docker(作為本次container)
@@ -534,6 +546,10 @@ $ sudo kubeadm join [token] [manster ip]:6443
 範例:
 ```
 kubeadm join 192.168.21.129:6443 --token 6u5fmv.l71op5r828pcg3sd --discovery-token-ca-cert-hash sha256:682bd0d4c11900532f06e50600fb86a2765b1a0de4c9514e0d8874b256183112
+```
+如果後續加入但沒把token記下，請輸入產生新的token
+```
+kubeadm token create --print-join-command
 ```
 **查詢是否有node建立**
 ```
