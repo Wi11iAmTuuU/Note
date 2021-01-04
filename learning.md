@@ -407,6 +407,10 @@ status:
         averageUtilization: 0
         averageValue: 0
 ```
+**重啟container**
+```
+$ kubectl rollout restart [deploment/daemont/pod name]
+```
 **進入container bash**
 ```
 $ kubectl exec -it [pod name] -n [pod namespace] -- bash
