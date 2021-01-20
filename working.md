@@ -68,7 +68,7 @@
 ### 四
 1. 整理容器化及kubernetes筆記
 2. 研究CRI-O
-## 第五禮拜
+## 第六禮拜
 ### 一
 1. 研究Container Network Interface(CNI)
 2. 研究DaemonSet
@@ -85,7 +85,7 @@
 ### 五
 1. 研究pod issue之解決方案
 2. 研究calico
-## 第六禮拜
+## 第七禮拜
 ### 一
 1. 研究calico
 2. 研究ingress
@@ -102,7 +102,7 @@
 1. 研究ingress path問題
 2. 研究RBAC
 3. 研究如何在kubernetes上連接前後端
-## 第七禮拜
+## 第八禮拜
 ### 一
 1. 規劃前後端分離小專案
 2. 研究Flask
@@ -119,7 +119,7 @@
 ### 五
 1. 研究vue
 2. 撰寫小專案
-## 第八禮拜
+## 第九禮拜
 ### 一
 1. 研究vue
 2. 研究flask
@@ -138,7 +138,7 @@
 ### 五
 1. 研究ingress-nginx-controller
 2. 修正小專案部分issue
-## 第九禮拜
+## 第十禮拜
 ### 一
 1. NGINX-ingress Overview
 2. 研究NGINX-ingress & NGINX-ingress plus差異
@@ -155,7 +155,7 @@
 ### 五
 1. 研究NGINX-ingress部屬參數
 2. 研究ingress class
-## 第十禮拜
+## 第十一禮拜
 ### 一
 1. 研究NGINX-ingress部屬參數
 2. 研究ingress pathType
@@ -175,7 +175,7 @@
 1. 研究OCP clusterrole/role
 2. 研究NGINX-ingress plus Dashboard
 3. 參加課程"知己知彼的人際風格互動"
-## 第十一禮拜
+## 第十二禮拜
 ### 一
 1. 研究NGINX-ingress plus Dashboard
 ### 二
@@ -188,7 +188,7 @@
 ### 五
 1. 研究NGINX-ingress plus Dashboard
 2. 研究Kong ingress controller
-## 第十二禮拜
+## 第十三禮拜
 ### 一
 1. 研究NGINX-ingress plus access Dashboard externally
 2. 研究Kong ingress controller
@@ -203,7 +203,7 @@
 ### 五
 1. 研究Kong ingress controller helm3 部屬參數
 2. 研究Kong ingress controller Custom Resources
-## 第十三禮拜
+## 第十四禮拜
 ### 一
 1. 研究Kong ingress controller KongIngress
 ### 二
@@ -220,7 +220,7 @@
 1. 研究Kong ingress controller各版本差異
 2. 研究Kong ingress controller KongIngress
 3. 研究Kong ingress readinessProbe及livenessProbe無法正常部屬解決方法
-## 第十四禮拜
+## 第十五禮拜
 ### 一
 1. 研究Kong ingress controller 整理各版本差異
 2. 研究Kong ingress controller KongIngress
@@ -237,7 +237,7 @@
 ### 五
 1. 研究Kong ingress controller 使用helm安裝異常原因
 2. 整理Kong ingress controller相關資訊
-## 第十五禮拜
+## 第十六禮拜
 ### 一
 1. 研究Kong ingress controller KongIngress
 2. 整理Kong ingress controller相關資訊
@@ -245,6 +245,61 @@
 ### 二
 1. 研究Kong ingress controller KongIngress
 2. 整理Kong ingress controller相關資訊
+### 三
+1. 研究Kong ingress controller 與NGINX差異性
+2. 整理Kong ingress controller相關資訊
+3. 研究NGINX-ingress controller TransportServer 
+### 四
+1. 研究Kong ingress controller 與NGINX差異性
+2. 整理Kong ingress controller相關資訊
+3. 研究NGINX-ingress controller TransportServer 
+### 五
+1. 整理Kong ingress controller相關資訊
+2. 研究NGINX-ingress controller GlobalConfiguration
+## 第十七禮拜
+### 一
+1. 研究NGINX-ingress controller TransportServer
+2. 研究NGINX-ingress controller GlobalConfiguration
+### 二
+1. 比較TCPIngress(Kong) & TransportServer(NGINX)
+2. 研究NGINX可用Annotation完成KongIngress的參數
+### 三
+1. 整理Kong ingress PPT
+2. 研究NGINX可用Annotation完成KongIngress的參數
+### 四
+1. 測試NGINX ingress controller TransportServer
+## 第十八禮拜
+### 一
+1. 修正Kong ingress controller PPT
+2. 測試NGINX-ingress controller TransportServer
+### 二
+1. 測試OCP上Postgresql掛載Synology nfs
+2. 研究Persistent Volumes/Persisten Volume Claims
+### 三
+1. 測試OCP上Postgresql掛載Synology nfs
+2. 研究Persistent Volumes/Persisten Volume Claims
+### 四
+1. 測試OCP上Postgresql掛載Synology nfs
+### 五
+1. 測試OCP上使用Deployment掛載Postgresql並連上Synology nfs
+## 第十九禮拜
+### 一
+1. 研究如何以sidecar方式監測Postgresql掛載Synology nfs
+### 二
+1. 研究KongIngress細部參數
+### 三
+1. 研究KongIngress細部參數
+### 四
+1. 測試NGINX-ingress-controller上OCP
+2. 研究TransportServer
+### 五
+1. 研究TransportServer
+## 第二十禮拜
+### 一
+1. 研究TransportServer
+### 二
+1. 研究ocp bastion上HAproxy配置
+2. 研究ocp cluster結構
 ### 三
 
 ### 四
@@ -254,51 +309,50 @@
 
 
 **Tmep**
-1. 
-2.
+Hi All (2021-01-11):
+1. 昨天進行的項目:
+   1.1 測試OCP上Postgresql掛載Synology nfs和Netapp(已成功掛載)
+2. 今天預計進行的項目:
+   2.1 做red team個人成果報告
+3. 待解決問題:
+   無
 
 ## 暫定結束項目
 nginx-ingress
 nginx-ingress-plus
+kong-ingress
 
 ## 待做項目
-kong-ingress
-haproxy(12月初開始)
-OCP(12月初開始)
+haproxy
+OCP
 kubernetes網路(之後研究重點)
 Argo(kubernetes視覺化workflow) 有空研究
 ServiceMesh
 
-## 12/21開會
-nginx-ingress是否有TCPIngress類似功能
 
 ---
 
-Hi All (2020-12-23):
+Hi All (2021-1-20):
 1. 昨天進行的項目:
-    1.1 研究Kong ingress controller
-        - KongIngress
-        - 整理kong相關資訊
+    1.1 研究ocp
+        - bastion上HAproxy配置
+        - cluster結構
 2. 今天預計進行的項目:
-    2.1 研究Kong ingress controller
-        - 與NGINX差異性
-        - 整理kong相關資訊
-    2.2 研究NGINX-ingress controller
-        - TransportServer 
+    2.1 研究ocp
+        - bastion上HAproxy配置
+    2.2 嘗試建起ocp
 3. 待解決問題:
     3.1 無
     
 ---
 
-Hi All (2020-12-21):
+Hi All (2021-1-18):
 1. 上周五進行的項目:
-    1.1 研究Kong ingress controller
-        - 研究使用helm安裝異常原因
-        - 整理kong相關資訊
+    1.1 研究NGINX-ingress-controller
+        - TransportServer
+    1.2 Dynasafe Kick-off Meeting
 2. 今天預計進行的項目:
-    2.1 研究Kong ingress controller
-        - 研究TCPIngress
-        - 研究使用helm安裝異常原因
-        - 整理kong相關資訊
+    2.1 研究NGINX-ingress-controller
+        - TransportServer
 3. 待解決問題:
     3.1 無
