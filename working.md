@@ -301,6 +301,17 @@
 1. 研究ocp bastion上HAproxy配置
 2. 研究ocp cluster結構
 ### 三
+1. 研究ocp bastion上HAproxy配置
+### 四
+1. 調整nginx-ingress配置以9432port連接pgsql
+### 五
+1. 研究ocp用bastion IP以TCP方式連接pgsql方法
+## 第二十一禮拜
+### 一
+
+### 二
+
+### 三
 
 ### 四
 
@@ -309,13 +320,6 @@
 
 
 **Tmep**
-Hi All (2021-01-11):
-1. 昨天進行的項目:
-   1.1 測試OCP上Postgresql掛載Synology nfs和Netapp(已成功掛載)
-2. 今天預計進行的項目:
-   2.1 做red team個人成果報告
-3. 待解決問題:
-   無
 
 ## 暫定結束項目
 nginx-ingress
@@ -332,27 +336,27 @@ ServiceMesh
 
 ---
 
-Hi All (2021-1-20):
+Hi All (2021-1-22):
 1. 昨天進行的項目:
     1.1 研究ocp
-        - bastion上HAproxy配置
-        - cluster結構
+        - 用bastion IP以TCP方式連接pgsql方法
 2. 今天預計進行的項目:
     2.1 研究ocp
-        - bastion上HAproxy配置
-    2.2 嘗試建起ocp
+        - 用bastion IP以TCP方式連接pgsql方法
+        - 
 3. 待解決問題:
     3.1 無
     
 ---
 
-Hi All (2021-1-18):
+Hi All (2021-1-25):
 1. 上周五進行的項目:
-    1.1 研究NGINX-ingress-controller
-        - TransportServer
-    1.2 Dynasafe Kick-off Meeting
+    1.1 研究ocp
+        - 用bastion IP以TCP方式連接pgsql方法
 2. 今天預計進行的項目:
-    2.1 研究NGINX-ingress-controller
-        - TransportServer
+    2.1 研究ocp
+        - 用bastion IP以TCP方式連接pgsql方法
+    2.2 研究Kong ingress
+        - 與nginx差異性
 3. 待解決問題:
     3.1 無
