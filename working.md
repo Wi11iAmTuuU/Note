@@ -308,11 +308,9 @@
 1. 研究ocp用bastion IP以TCP方式連接pgsql方法
 ## 第二十一禮拜
 ### 一
-
+1. 研究ocp用bastion IP以TCP方式連接pgsql方法
 ### 二
-
-### 三
-
+1. 研究ocp用bastion IP以TCP方式連接pgsql方法
 ### 四
 
 ### 五
@@ -325,28 +323,26 @@
 nginx-ingress
 nginx-ingress-plus
 kong-ingress
-
-## 待做項目
 haproxy
 OCP
-kubernetes網路(之後研究重點)
-Argo(kubernetes視覺化workflow) 有空研究
-ServiceMesh
 
+## 待做項目
+kubernetes網路(之後研究重點)
+Argo(kubernetes視覺化workflow,GitOps) 有空研究
+ServiceMesh
 
 ---
 
-Hi All (2021-1-22):
-1. 昨天進行的項目:
+Hi All (2021-1-28):
+1. 禮拜二進行的項目:
     1.1 研究ocp
         - 用bastion IP以TCP方式連接pgsql方法
 2. 今天預計進行的項目:
-    2.1 研究ocp
-        - 用bastion IP以TCP方式連接pgsql方法
-        - 
+    2.1 研究Kong ingress
+        - 與nginx差異性
 3. 待解決問題:
     3.1 無
-    
+
 ---
 
 Hi All (2021-1-25):
