@@ -312,9 +312,52 @@
 ### 二
 1. 研究ocp用bastion IP以TCP方式連接pgsql方法
 ### 四
+1. 研究Benchmark results of Kubernetes network plugins
+2. 研究Kong ingress與nginx差異性
+### 五
+1. 研究Kong ingress與nginx差異性
+2. 研究GitOps(ArgoCD)
+## 第二十二禮拜
+### 一
+1. 研究 A visual guide on troubleshooting Kubernetes deployments
+### 二
+1. 研究 A visual guide on troubleshooting Kubernetes deployments
+### 三
+1. NGINX Core training class lab
+### 四
+1. 研究 NodeSelector
+2. 研究kubernetes 1.20更新內容
+3. 研究windows container
+### 五
+1. 「年度績效目標設定」課程
+2. 研究windows container kubernetes環境
+## 第二十三禮拜
+### 一
+1. 研究windows container kubernetes環境
+2. 研究Kustomize
+### 二
+1. 研究windows container kubernetes環境(Calico)
+2. 研究Windows and Linux container platform
+## 第二十四禮拜
+### 三
+1. 研究Kubernetes 1.20更新內容
+2. 研究Hildegard(TeamTNT惡意程式)
+### 四
+1. 研究OCP with helm 3
+2. 研究kong for Kubernetes 2.3.x 更新內容
+3. 研究kubernetes ExternalDNS
+### 六
+1. 研究OCP with helm 3
+## 第二十五禮拜
+### 一
+
+### 二
+
+### 三
+
+### 四
 
 ### 五
-
 
 
 **Tmep**
@@ -333,26 +376,28 @@ ServiceMesh
 
 ---
 
-Hi All (2021-1-28):
-1. 禮拜二進行的項目:
-    1.1 研究ocp
-        - 用bastion IP以TCP方式連接pgsql方法
+Hi All (2021-2-23):
+1. 昨日進行的項目:
+    1.1 研究kubernetes
+        - Network Policy
 2. 今天預計進行的項目:
-    2.1 研究Kong ingress
-        - 與nginx差異性
+    2.1 研究kubernetes
+        - Network Policy
+    2.2 研究kong
+        - 與NGINX差異
 3. 待解決問題:
     3.1 無
 
 ---
 
-Hi All (2021-1-25):
-1. 上周五進行的項目:
-    1.1 研究ocp
-        - 用bastion IP以TCP方式連接pgsql方法
+Hi All (2021-2-17):
+1. 上周二進行的項目:
+    1.1 研究windows container
+        - kubernetes環境(Calico)
+        - Windows and Linux container platform
 2. 今天預計進行的項目:
-    2.1 研究ocp
-        - 用bastion IP以TCP方式連接pgsql方法
-    2.2 研究Kong ingress
-        - 與nginx差異性
+    2.1 研究windows container
+        - kubernetes環境
+    2.2 研究Hildegard(TeamTNT惡意程式)
 3. 待解決問題:
     3.1 無
