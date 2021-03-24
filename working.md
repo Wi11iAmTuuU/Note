@@ -350,9 +350,69 @@
 1. 研究OCP with helm 3
 ## 第二十五禮拜
 ### 一
-
+1. 研究kubernetes Network Policy
 ### 二
-
+1. 研究kubernetes Network Policy
+2. 研究OCP Secured routes
+### 三
+1. 研究kubernetes kube-vip
+2. 研究kubernetes keepalived
+3. 研究kubernetes Dockershim Deprecation
+### 四
+1. 研究kubernetes Dockershim Deprecation
+2. 研究kubernetes secret
+3. 參加SMO教育訓練
+### 五
+1. 研究kubernetes micro sevice
+## 第二十六禮拜
+### 二
+1. 研究kubernetes microsevice
+2. 研究kubernetes Ksniff
+### 三
+1. 研究kubernetes microsevice
+2. 研究kubernetes ServiceMesh
+### 四
+1. 研究kubernetes microsevice
+2. 研究kubernetes ServiceMesh
+### 五
+1. 研究kubernetes microsevice
+2. 研究kubernetes CSI
+3. 研究kubernetes etApp trident
+## 第二十七禮拜
+### 一
+1. 研究kubernetes之封包去哪兒
+2. 研究kubernetes pod內containers如何共用localhost
+### 二
+1. 研究network namespace
+2. 研究OCP 安裝步驟
+### 三
+1. 研究OCP 安裝步驟
+2. docker-desktop kubernetes in wsl pv path問題
+### 四
+1. 研究OCP 安裝步驟
+### 五
+1. 研究OCP 安裝步驟
+2. 研究OCP 協助kevin架設OCP
+## 第二十八禮拜
+### 一
+1. 研究kubernetes Harbor https憑證(不重啟Docker)
+### 二
+1. 研究kubernetes Harbor https憑證(不重啟Docker)
+### 三
+1. 研究kubernetes Harbor https憑證(不重啟Docker)
+### 四
+1. 研究OCP kube-controller-manager pod CrashLoopBackOff(bigip1 node clusterNetwork cidr out of range)
+2. 研究OCP route path 造成application is not available
+### 五
+1. 研究OCP route path 造成application is not available
+## 第二十九禮拜
+### 一
+1. 研究kubernetes Harbor https憑證(不重啟Docker)
+2. 研究OCP route
+### 二
+1. 研究Harbor Offline install
+2. 研究docker save image to tar
+3. 研究docker load image from tar
 ### 三
 
 ### 四
@@ -360,7 +420,11 @@
 ### 五
 
 
+
 **Tmep**
+
+
+
 
 ## 暫定結束項目
 nginx-ingress
@@ -376,28 +440,29 @@ ServiceMesh
 
 ---
 
-Hi All (2021-2-23):
+Hi All (2021-3-24):
 1. 昨日進行的項目:
-    1.1 研究kubernetes
-        - Network Policy
+    1.1 研究Harbor
+        - Offline install
+    1.2 研究docker
+        - save image to tar
+        - load image from tar
 2. 今天預計進行的項目:
-    2.1 研究kubernetes
-        - Network Policy
-    2.2 研究kong
-        - 與NGINX差異
+    2.1 研究Harbor
+        - Offline install
 3. 待解決問題:
     3.1 無
 
 ---
 
-Hi All (2021-2-17):
-1. 上周二進行的項目:
-    1.1 研究windows container
-        - kubernetes環境(Calico)
-        - Windows and Linux container platform
+Hi All (2021-3-22):
+1. 上周五進行的項目:
+    1.1 研究OCP
+        - route path 造成application is not available
 2. 今天預計進行的項目:
-    2.1 研究windows container
-        - kubernetes環境
-    2.2 研究Hildegard(TeamTNT惡意程式)
+    2.1 研究OCP
+        - route path 造成application is not available
+    2.2 研究kubernetes
+        - Harbor https憑證(不重啟Docker)
 3. 待解決問題:
     3.1 無
