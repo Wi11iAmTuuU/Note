@@ -154,7 +154,7 @@ service用，指的是目標Pod的port，通常port跟targetPort會設定一樣�
 
 ### yaml檔範例
 **Pod**
-```
+``` yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -173,7 +173,7 @@ spec:
        – containerPort: 88
 ```
 **Deployment**
-```
+``` yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -197,7 +197,7 @@ spec:
         - containerPort: 80
 ```
 **Service(NodePort)**
-```
+``` yaml
 kind: Service
 apiVersion: v1
 metadata:
@@ -213,7 +213,7 @@ spec:
       nodePort: 30562
 ```
 **Ingress**
-```
+``` yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -236,7 +236,7 @@ spec:
                 name: icon-assets
 ```
 **DaemonSet**
-```
+``` yaml
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -281,7 +281,7 @@ spec:
           path: /var/lib/docker/containers
 ```
 **StatefulSet**
-```
+``` yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -372,7 +372,7 @@ kubectl scale deployment/'deployment name' --replicas='quantity'
 kubectl autoscale deployment [name] --cpu-percent=50 --min=1 --max=10
 ```
 也可撰寫yaml檔使用HPA
-```
+``` yaml
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -414,6 +414,18 @@ $ kubectl rollout restart [deploment/daemont/pod name]
 **進入container bash**
 ```
 $ kubectl exec -it [pod name] -n [pod namespace] -- bash
+```
+```
+$ oc rsh [pod name]
+```
+**客製化顯示pod資訊**
+顯示node name及pod name並以node name排序
+```
+kubectl get pod -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name --all-namespaces | sort
+```
+**神奇指令**
+```
+oc get pods --all-namespaces| grep Evicted | $(awk '{print "oc -n " $1 " delete pod "$2}')
 ```
 ## 環境安裝(安裝kubeadm在CentOS上為例)
 ### 必備資源
@@ -688,7 +700,7 @@ helm install [tgz 名稱] --generate-name
 ```
 **yaml檔介紹**
 values.yaml
-```
+``` yaml
 replicaCount: 2
  image:
    repository: hcwxd/blue-whale
@@ -702,7 +714,7 @@ replicaCount: 2
        paths: [/]
 ```
 deployment.yaml
-```
+``` yaml
 apiVersion: apps/v1
  kind: Deployment
  metadata:
@@ -724,7 +736,7 @@ apiVersion: apps/v1
              - containerPort: 3000
 ```
 service.yaml
-```
+``` yaml
 apiVersion: v1
  kind: Service
  metadata:
@@ -739,7 +751,7 @@ apiVersion: v1
      app: {{ include "value-helm-demo.fullname" . }}
 ```
 ingress.yaml
-```
+``` yaml
 {{- if .Values.ingress.enabled -}}
  {{- $fullName := include "value-helm-demo.fullname" . -}}
  apiVersion: extensions/v1beta1
@@ -762,7 +774,7 @@ ingress.yaml
 ```
 Templates(模板)先定義，當要使用時include進yaml。
 為了避免Templates的空格數發生異常，可以使用indent限制空格數。
-```
+``` yaml
 {{- define "mychart.labels" }}
   labels:
     generator: helm
@@ -785,7 +797,7 @@ data:
 ```
 三項文件中的參數會由values.yaml自動填入
 helm也有if 
-```
+``` yaml
 {{ if PIPELINE }}
   # Do something
 {{ else if OTHER PIPELINE }}
@@ -802,7 +814,7 @@ helm也有if
 * 空的集合（map、slice、tuple、dict、array）
 
 也有內建等運算元
-```
+``` 
 {{ if eq .Values.course.python "django" }}web: true{{ end }}
 
 and .Arg1 .Arg2 (Arg1 && Arg2, 及)
@@ -908,3 +920,4 @@ https://www.kubernetes.org.cn/4960.html
 https://helm.sh/
 - **Prometheus官方**
 https://prometheus.io/
+
