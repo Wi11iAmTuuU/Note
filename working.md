@@ -414,10 +414,22 @@
 2. 研究docker save image to tar
 3. 研究docker load image from tar
 ### 三
+1. 研究Harbor Offline install
+2. 研究OCP route
+### 四
+1. NGINX ingress plus Dashboard
+2. 研究OCP route
+### 五
+1. NGINX ingress plus Dashboard Zones/Upstreams
+2. 研究OCP route 與 NGINX ingress 衝突
+## 第三十禮拜
+### 一
+1. 研究OCP route 與 NGINX ingress 衝突
+### 二
+
+### 三
 
 ### 四
-
-### 五
 
 
 
@@ -437,32 +449,36 @@ OCP
 kubernetes網路(之後研究重點)
 Argo(kubernetes視覺化workflow,GitOps) 有空研究
 ServiceMesh
+nginx-ingress plus dashboard
 
 ---
 
-Hi All (2021-3-24):
+Hi All (2021-3-30):
 1. 昨日進行的項目:
-    1.1 研究Harbor
-        - Offline install
-    1.2 研究docker
-        - save image to tar
-        - load image from tar
-2. 今天預計進行的項目:
-    2.1 研究Harbor
-        - Offline install
-3. 待解決問題:
-    3.1 無
-
----
-
-Hi All (2021-3-22):
-1. 上周五進行的項目:
     1.1 研究OCP
-        - route path 造成application is not available
+        - route 與 NGINX ingress 衝突
 2. 今天預計進行的項目:
     2.1 研究OCP
-        - route path 造成application is not available
-    2.2 研究kubernetes
-        - Harbor https憑證(不重啟Docker)
+        - route 與 NGINX ingress 衝突
+        - route
 3. 待解決問題:
     3.1 無
+
+---
+
+Hi All (2021-3-29):
+1. 上周五進行的項目:
+    1.1 NGINX ingress plus
+        - Dashboard Zones/Upstreams
+    1.2 研究OCP
+        - route 與 NGINX ingress 衝突
+2. 今天預計進行的項目:
+    2.1 研究OCP
+        - route 與 NGINX ingress 衝突
+3. 待解決問題:
+    3.1 無
+
+
+route nginx-ingress 使用http時 
+OCP出海口都為worker node ip:80/443
+發生衝突導致流量只會由route出去
