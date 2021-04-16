@@ -426,16 +426,47 @@
 ### 一
 1. 研究OCP route 與 NGINX ingress 衝突
 ### 二
-
+1. 研究OCP route 與 NGINX ingress 衝突
+2. 研究OCP Nginx route
 ### 三
-
+1. NetApp Trident
 ### 四
-
-
+1. OCP 搬遷Nginx ingress controller到infra上
+2. 研究websocket
+3. 研究OMS notifiy
+## 第三十一禮拜
+### 二
+1. 研究OMS notifiy
+### 三
+1. OCP websocket(資料流走80/443上OCP可使用)
+2. 研究OMS notifiy Heartbeat
+### 四
+1. 研究OMS notifiy Heartbeat
+2. 研究OMS notifiy msgtableFunctions
+3. 研究OMS notifiy groupingNotifyFunctions
+### 五
+1. 研究OMS notifiy
+## 第三十二禮拜
+### 一
+1. 研究OMS notifiy heartdao
+2. 研究OMS notifiy notifyService
+3. 研究OMS notifiy groupingNotifyFunctions
+### 二
+1. 研究OMS notifiy notifyService
+2. 研究OMS notifiy groupingNotifyFunctions
+### 三
+1. 研究OMS notifiy notifyService
+2. 研究OMS notifiy RequestServices
+3. 研究OMS notifiy jdbcClass.insertAlert
+### 四
+1. 研究OMS notifiy notifyService
+2. 研究OMS notifiy msgtableFunctions
+3. 研究OMS notifiy GetIP
+### 五
 
 **Tmep**
 
-
+下禮拜一(4/19) 下午一點半
 
 
 ## 暫定結束項目
@@ -453,28 +484,31 @@ nginx-ingress plus dashboard
 
 ---
 
-Hi All (2021-3-30):
+Hi All (2021-4-16):
 1. 昨日進行的項目:
-    1.1 研究OCP
-        - route 與 NGINX ingress 衝突
+    1.1  研究OMS notifiy
+        - notifyService
+        - msgtableFunctions
+        - GetIP
 2. 今天預計進行的項目:
-    2.1 研究OCP
-        - route 與 NGINX ingress 衝突
-        - route
+    2.1 研究OMS notifiy
 3. 待解決問題:
     3.1 無
 
 ---
 
-Hi All (2021-3-29):
-1. 上周五進行的項目:
-    1.1 NGINX ingress plus
-        - Dashboard Zones/Upstreams
-    1.2 研究OCP
-        - route 與 NGINX ingress 衝突
+Hi All (2021-4-6):
+1. 上周四進行的項目:
+    1.1 OCP
+        - 搬遷Nginx ingress controller到infra上
+    1.2 研究websocket
+    1.3 OMS
+        - 研究notifiy
 2. 今天預計進行的項目:
-    2.1 研究OCP
-        - route 與 NGINX ingress 衝突
+    2.1 OCP
+        - websocket
+    2.2 OMS
+        - 研究notifiy
 3. 待解決問題:
     3.1 無
 
