@@ -463,10 +463,57 @@
 2. 研究OMS notifiy msgtableFunctions
 3. 研究OMS notifiy GetIP
 ### 五
+1. 研究OMS notifiy notifyService
+2. 研究OMS notifiy groupingNotifyFunctions
+3. 黑客松
+## 第三十三禮拜
+### 一
+1. 研究OMS notifiy groupingNotifyFunctions
+2. 研究OMS notifiy heartBeatService
+3. 研究OMS notifiy heartdao
+4. NetApp Trident
+### 二
+1. 研究OMS notifiy jdbcClass
+2. 研究OMS notifiy MsgtableFunctions
+3. 研究OMS notifiy RedisService
+### 三
+1. 研究OMS notifiy MsgtableFunctions
+2. 研究OMS notifiy RedisService
+### 四
+1. 研究OCP NGINX 80/443問題
+2. 研究OCP 新增infra node
+### 五
+1. 研究OCP 整理NGINX-Ingress資訊
+2. 研究OCP with NetApp trident
+3. 黑客松
+## 第三十四禮拜
+### 一
+1. 整理NetApp Trident with solidfire相關資料
+2. 研究kubernetes 從網路觀點來看導入 Kubernetes 的可能痛點
+3. 研究kubernetes external-dns
+### 二
+1. 研究OCP dns
+2. 研究kubernetes 從網路觀點來看導入 Kubernetes 的可能痛點
+3. 研究kubernetes external-dns
+### 三
+1. 研究OCP 藍綠部屬
+2. 研究OCP 金絲雀部屬
+### 四
+1. 研究kubernetes Networking
+## 第三十五禮拜
+### 一
+1. 研究Kubernetes best practices(Google Cloud Blog)
+2. 研究OMS alert MainController
+### 二
+
+### 三
+
+### 四
+
+### 五
 
 **Tmep**
 
-下禮拜一(4/19) 下午一點半
 
 
 ## 暫定結束項目
@@ -474,45 +521,63 @@ nginx-ingress
 nginx-ingress-plus
 kong-ingress
 haproxy
+nginx-ingress plus dashboar
 OCP
 
 ## 待做項目
 kubernetes網路(之後研究重點)
 Argo(kubernetes視覺化workflow,GitOps) 有空研究
 ServiceMesh
-nginx-ingress plus dashboard
+
+5/4(二)IBM安裝OCP監控軟體 
 
 ---
 
-Hi All (2021-4-16):
+Hi All (2021-5-4):
 1. 昨日進行的項目:
-    1.1  研究OMS notifiy
-        - notifyService
-        - msgtableFunctions
-        - GetIP
+    1.1 研究Kubernetes best practices(Google Cloud Blog)
+    1.2 研究OMS alert
+        - MainController
 2. 今天預計進行的項目:
-    2.1 研究OMS notifiy
+    2.1 研究OMS alert
+    2.2 instana
 3. 待解決問題:
     3.1 無
 
 ---
 
-Hi All (2021-4-6):
-1. 上周四進行的項目:
-    1.1 OCP
-        - 搬遷Nginx ingress controller到infra上
-    1.2 研究websocket
-    1.3 OMS
-        - 研究notifiy
+Hi All (2021-4-26):
+1. 上周五進行的項目:
+    1.1 研究OCP
+        - 整理NGINX-Ingress資訊
+        - NetApp trident with solidfire
+    1.2 黑客松
 2. 今天預計進行的項目:
-    2.1 OCP
-        - websocket
-    2.2 OMS
-        - 研究notifiy
+    2.1 整理NetApp Trident with solidfire相關資料
+    2.2 研究OMS alert
 3. 待解決問題:
     3.1 無
 
 
-route nginx-ingress 使用http時 
-OCP出海口都為worker node ip:80/443
-發生衝突導致流量只會由route出去
+### trident (NetApp SolidFire)
+192.168.61.8 MVIP
+192.168.61.10 SVIP
+
+4個IP
+- MVIP(管理IP)
+- SVIP(storage IP)
+- Node-Management IP
+- Node-Storage IP 
+
+#### 一般windows
+iscsi 設定->啟動名稱
+到管理介面 Initiators 新增帳戶
+新增volume 到access group 串帳戶及volume
+串完到iscsi進行連接 初始化完即可
+
+#### kubernetes (OCP)
+在worker node 調整iscasi
+安裝trident
+```
+tridentctl install -n trident --image-registry 10.255.78.56/trident/k8s.gcr.io/sig-storage/ --trident-image 10.255.78.56/trident/netapp/trident:21.01.1 --autosupport-image 10.255.78.56/trident/netapp/trident-autosupport:21.01
+```
