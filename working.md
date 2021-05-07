@@ -505,15 +505,22 @@
 1. 研究Kubernetes best practices(Google Cloud Blog)
 2. 研究OMS alert MainController
 ### 二
-
+1. instana 開會並架設
+2. instana 將OCP加入監測
+3. 研究OMS alert MainController
 ### 三
-
+1. 研究instana Infrastructure
+2. 研究instana Applications
+3. 研究kubernetes 1.21更新
+4. 研究OMS alert MainController
 ### 四
-
+1. 研究零信任架構
+2. 研究OMS alert MainController
+3. 研究OMS alert UiGetInfos
 ### 五
 
 **Tmep**
-
+研究零信任架構
 
 
 ## 暫定結束項目
@@ -529,18 +536,17 @@ kubernetes網路(之後研究重點)
 Argo(kubernetes視覺化workflow,GitOps) 有空研究
 ServiceMesh
 
-5/4(二)IBM安裝OCP監控軟體 
-
 ---
 
-Hi All (2021-5-4):
+Hi All (2021-5-7):
 1. 昨日進行的項目:
-    1.1 研究Kubernetes best practices(Google Cloud Blog)
+    1.1 研究零信任架構
     1.2 研究OMS alert
         - MainController
+        - UiGetInfos
 2. 今天預計進行的項目:
     2.1 研究OMS alert
-    2.2 instana
+    2.2 研究containerd
 3. 待解決問題:
     3.1 無
 
