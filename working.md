@@ -377,7 +377,7 @@
 ### 五
 1. 研究kubernetes microsevice
 2. 研究kubernetes CSI
-3. 研究kubernetes etApp trident
+3. 研究kubernetes NetApp trident
 ## 第二十七禮拜
 ### 一
 1. 研究kubernetes之封包去哪兒
@@ -518,9 +518,38 @@
 2. 研究OMS alert MainController
 3. 研究OMS alert UiGetInfos
 ### 五
+1. 研究OCP 架設NGINX Ingress Controller(Open Source)
+2. 研究OMS alert MainController
+3. 研究OMS alert UiGetInfos
+4. 研究containerd
+## 第三十六禮拜
+### 一
+1. team meeting
+2. 研究OCP trident
+3. 研究OMS alert MainController
+### 二
+1. 研究OMS alert MainController
+2. 研究OMS alert UiGetInfos
+3. 研究OMS alert MsgtableFunctions
+### 三
+1. 研究OMS alert UiGetInfos
+2. 研究OMS alert MsgtableFunctions
+3. 研究OMS alert jdbcservice
+4. 研究OCP 4.6.8版安裝
+### 四
+
+### 五
+
 
 **Tmep**
 研究零信任架構
+
+## 開會
+容器安全(輔助security team)
+容器監控
+prisma cloud
+runtime security
+
 
 
 ## 暫定結束項目
@@ -538,29 +567,36 @@ ServiceMesh
 
 ---
 
-Hi All (2021-5-7):
+Hi All (2021-5-13):
 1. 昨日進行的項目:
-    1.1 研究零信任架構
-    1.2 研究OMS alert
-        - MainController
+    1.1 研究OMS alert
         - UiGetInfos
+        - MsgtableFunctions
+        - jdbcservice
+    1.2 研究OCP
+        - 4.6.8版安裝
 2. 今天預計進行的項目:
-    2.1 研究OMS alert
-    2.2 研究containerd
+    2.1 研究OCP
+        - 4.6.8版安裝
+    2.2 研究OMS alert
 3. 待解決問題:
     3.1 無
 
 ---
 
-Hi All (2021-4-26):
+Hi All (2021-5-10):
 1. 上周五進行的項目:
     1.1 研究OCP
-        - 整理NGINX-Ingress資訊
-        - NetApp trident with solidfire
-    1.2 黑客松
+        - 架設NGINX Ingress Controller(Open Source)
+    1.2 研究OMS alert
+        - MainController
+        - UiGetInfos
+        - MsgtableFunctions
+    1.3 研究containerd
 2. 今天預計進行的項目:
-    2.1 整理NetApp Trident with solidfire相關資料
-    2.2 研究OMS alert
+    2.1 研究OMS alert
+    2.2 研究OCP
+        - 調整TransportServer
 3. 待解決問題:
     3.1 無
 
