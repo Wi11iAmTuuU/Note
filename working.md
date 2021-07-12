@@ -1,4 +1,6 @@
 # 工作紀錄
+![](https://i.imgur.com/Fsba7f6.png)
+
 ## 第一禮拜
 ### 一
 1. 學習Container概念
@@ -534,23 +536,196 @@
 ### 三
 1. 研究OMS alert UiGetInfos
 2. 研究OMS alert MsgtableFunctions
-3. 研究OMS alert jdbcservice
-4. 研究OCP 4.6.8版安裝
+3. 研究OCP 4.6.8版安裝
+4. 研究OCP trident
+### 四
+1. 研究OCP 4.6.8版安裝
+2. 研究OCP trident
+### 五
+1. 研究OCP trident
+2. 研究OCP 4.6.8版安裝
+## 第三十七禮拜
+### 一
+1. Microservices: monitoring and observability
+2. 研究OCP 4.6.8版安裝
+### 二
+1. 研究OCP 4.6.8版安裝 coreos-installer 參數
+2. 研究OCP 4.6.8版安裝 網路相關設定(nmtui/nmcli)
+3. 協助架設主機
+### 三
+1. 研究OCP 4.6版安裝 coreos.inst boot options for ISO install
+2. 協助設定主機
+### 四
+1. 研究OCP 4.6版安裝
+  - Master install時發生api-int.ocp.olg.com:22623/config/master connection refused
+  - ssh進bootstrap下journalctl -b -f -u release-image.service -u bootkube.service指令
+  - 發現多處GET https://quay.io/v2/...... fail
+  - 測試從bootstrap curl https://quay.io/v2/ 發現找不到域名
+  - 研判boostrap dns問題
+### 五
+1. 安裝OCP 4.6版安裝
+2. 研究OCP 4.6版安裝 bootstrap dns問題
+  - 進bootstrap查看dns相關設置 發現缺少resolv.conf 
+  - 重建bootstrap node時 卻有了
+  - 研判dns問題為人為因素(nameserver 打錯字)
+3. 研究OCP 4.6版安裝 worker node安裝問題
+  - woker node安裝時 api-int.ocp.olg.com:22623/config/worker connection refused
+  - 研究後發現 master向bootstrap取資料 worker向master取資料
+  - 審視過dnsmasq及haproxy設置後 發現haproxy之前在測試未改回正確
+## 第三十八禮拜
+### 一
+1. 研究OCP 安裝4.6版
+2. 研究OCP bootstrap node
+### 二
+1. 研究OCP prisma cloud(twistlock)
+2. 研究OCP spinnaker
+### 三
+1. 研究OCP bootstrap node
+2. 研究OCP argoCD
+### 四
+1. 研究OCP bootstrap bootkube.service
+2. 研究OCP argoCD 排程sync(協助Neil測試OK 但詳細參數需再了解)
+3. 研究OCP git webhook
+### 五
+1. 研究OCP Vellero(hackathon) PPT撰寫
+2. 研究OCP argoCD 排程sync duration 參數
+## 第三十九禮拜
+### 一
+1. Team Meeting
+2. 研究OCP compute0 NotReady問題
+3. 研究DevSecOps
+### 二
+1. 釐清 compute node NotReady問題
+2. 釐清4.5版OCP command line(powershell等)可正常連線 但web-console顯示憑證問題
+### 三
+1. 4.6版OCP 新增4個Worker Node並移除kubelet異常的compute0/1
+2. 釐清4.5版OCP command line可正常連線 但web-console使用chrome連線顯示憑證問題
+### 四
+1. 釐清並修正OCP相關問題
+   - 4.5版OCP因Domain問題 chrome無法正常連線(顯示憑證問題)
+   - 重新架設4.5版OCP Domain為ocp.syc.com
+   - 調整之前syc(kevin架的)的haproxy導流到新架的OCP
+   - 使新的OCP不用調整hosts即可連上
+2. 研究OVN(Open Virtual Network)
+### 五
+1. 研究OCP OVN-kubernetes Geneve
+2. 研究overlay
+3. 研究OCP openshift-SDN VXLAN
+## 第四十禮拜
+### 一
+1. 研究OCP OVN-kubernetes Geneve
+2. 研究OCP openshift-SDN VXLAN
+### 二
+1. 研究fluentd td-agent
+2. 研究fluentd calyptia-fluentd
+3. 研究OCP openshift-SDN VXLAN
+4. 研究OCP openshift-SDN OVS (open vswitch)
+### 三
+1. 研究td-agent 架構
+2. 研究td-agent.conf 參數設定
+3. hackathon 開會
+4. 複習nodeselector用法
+### 四
+1. 研究td-agent.conf 參數設定
+2. 研究fluentd 嘗試單一log從VM傳給EFK VM上的td-agent接收(成功)
+### 五
+1. 研究td-agent.conf 參數設定
+2. 研究fluentd 嘗試多log從VM傳給EFK VM上的td-agent接收(成功)
+3. 研究OCP SYC 連不上原因
+## 第四十一禮拜
+### 二
+1. 研究EFK kibana相關設定
+2. 嘗試將OMS notify log傳給EFK VM上的elasticsearch接收(成功)
+3. Team meeting
+### 三
+1. 研究EFK fluentd parse參數設定
+2. 協助neil釐清並處理ocp olg(4.6版) 連線異常問題
+### 四
+1. 研究EFK fluentd parse參數設定
+2. 研究EFK 嘗試將notify log以regexp切分成logtime thread_id log_level application message(成功)
+### 五
+1. 研究EFK fluentd parse regexp/multiline參數設定
+2. 研究EFK 嘗試將oms log以regexp/multiline解析成logtime thread_id log_level application message(成功)
+## 第四十二禮拜
+### 一
+1. Team meeting
+2. 研究EFK fluentd parse time)key參數相關設定
+### 二
+1. IBM IAM Training
+   - SDS 6.4 架構介紹、LDAP基礎概念、安裝和基礎配置
+   - TDI 7.2 架構介紹、安裝和基礎配置
+### 三
+1. IBM IAM Training
+   - SIM7.9 架構介紹、服務、workflow等。安裝和基礎配置、HRFeed 類比
+### 四
+1. IBM IAM Training
+   - IBM Verify（ISAM/WebSEAL）10 (架構介紹、SSO 技術。安裝和基礎配置、SSO 整合)
+   - SIM 和 IBM Verify 整合，實現 Verify 的帳號管理，並展示 HRFeed 的一個入職和離職流程)
+### 五
+1. 研究EFK 解析nginx log並加進EFK中
+2. 研究EFK 將oms log elasticsearch index加入當日日期以便清除過舊的log(成功)
+3. 研究EFK notify因logtime格式index中日期會為前一天(待確認)
+## 第四十三禮拜
+### 一
+1. 研究EFK notify因logtime格式index日期為前一天(經由time_format參數定義年月日時分秒後 以解決)
+2. 研究EFK 過舊log以elasticsearch restful api針對index上日期進行刪除(成功)
+### 二
+1. 研究EFK 調整fluentd regexp去除thread_id
+2. 研究EFK 研究elasticsearch curator 自動清除過舊log功能
+### 三
+1. 研究elasticsearch curator 自動清除過舊log功能
+2. ocp 4.7 研究hybrid networking with OVN-Kubernetes
+3. 建立ocp 4.7 cluster
+### 四
+1. ocp 4.7 設定hybrid networking with OVN-Kubernetes(custom port 9898)
+2. 建立ocp 4.7 cluster with F5 DNS, haproxy
+### 五
+1. ocp 4.7 設定hybrid networking with OVN-Kubernetes
+2. 建立ocp 4.7 cluster with F5 DNS, haproxy
+3. ocp 4.7 研究Windows Machine Config Operator(WMCO)
+## 第四十四禮拜
+### 一
+1. 週會
+2. 研究ocp 4.7 YAML for a Windows MachineSet object
+3. 研究ocp 4.7 windows container node初始化設定
+### 二
+1. ocp 4.7 恢復cluster
+2. ocp 4.7 查看worker0 無法開啟原因
+3. 研究EFK Hot-Warm Architecture 基礎概念
+### 三
+1. ocp 4.7 釐清worker0 無法啟動原因
+2. 重建ocp 4.7 worker0 node(完成)
+3. 研究EFK Hot-Warm Architecture基礎概念
+### 四
+1. 釐清Harbor(192.168.50.11)無法使用原因並解決(完成)
+2. 研究EFK Hot-Warm Architecture 架構概念
+3. 研究EFK index lifecycle management(ILM)
+### 五
+1. 釐清OCP 4.7 with windows container是否因UPI而無法使用(以確認只支援IPI)
+2. 研究OCP whats new in openshift 4.8(June 24, 2021) 簡報
+3. 學習安裝prisma cloud  twistlock console&twistlock defender
+## 第四十五禮拜
+### 一
+
+### 二
+
+### 三
+
 ### 四
 
 ### 五
 
 
+
 **Tmep**
 研究零信任架構
+elk冷溫熱三區...
 
 ## 開會
 容器安全(輔助security team)
 容器監控
 prisma cloud
 runtime security
-
-
 
 ## 暫定結束項目
 nginx-ingress
@@ -567,36 +742,33 @@ ServiceMesh
 
 ---
 
-Hi All (2021-5-13):
+Hi All (2021-7-12):
 1. 昨日進行的項目:
-    1.1 研究OMS alert
-        - UiGetInfos
-        - MsgtableFunctions
-        - jdbcservice
-    1.2 研究OCP
-        - 4.6.8版安裝
+    1.1 釐清OCP 4.7 with windows container是否因UPI而無法使用(以確認只支援IPI)
+    1.2 研究OCP 4.8
+        - whats new in openshift 4.8(June 24, 2021) 簡報
+    1.2 學習安裝prisma cloud 
+        - twistlock console
+        - twistlock defender
 2. 今天預計進行的項目:
-    2.1 研究OCP
-        - 4.6.8版安裝
-    2.2 研究OMS alert
+    2.1 研究EFK
+        - Hot-Warm Architecture
 3. 待解決問題:
     3.1 無
 
 ---
 
-Hi All (2021-5-10):
+Hi All (2021-7-5):
 1. 上周五進行的項目:
-    1.1 研究OCP
-        - 架設NGINX Ingress Controller(Open Source)
-    1.2 研究OMS alert
-        - MainController
-        - UiGetInfos
-        - MsgtableFunctions
-    1.3 研究containerd
+    1.1 釐清ocp 4.7 with windows container是否因UPI而無法使用(以確認只支援IPI)
+    1.2 研究OCP 4.8
+        - whats new in openshift 4.8(June 24, 2021) 簡報
+    1.2 學習安裝prisma cloud 
+        - twistlock console
+        - twistlock defender
 2. 今天預計進行的項目:
-    2.1 研究OMS alert
-    2.2 研究OCP
-        - 調整TransportServer
+    2.1 研究EFK
+        - Hot-Warm Architecture
 3. 待解決問題:
     3.1 無
 
