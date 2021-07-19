@@ -739,3 +739,95 @@ sudo coreos-installer install /dev/sda
 ![](https://i.imgur.com/YdQ0Nan.png)
 ![](https://i.imgur.com/1TLcHiJ.png)
 ![](https://i.imgur.com/nJYkJm1.png)
+
+## prisma cloud(twistlock)
+### Step 1. 下載prisma_cloud_compute_edition_21_04_412.tar.gz
+https://drive.google.com/file/d/1a5nuIv-_LD2sjFLwgmmCFPslMbNvCgTn/view?usp=sharing
+`#提醒: 請先將image加入到私有倉`
+
+### Step 2. 產生twistlock_console.yaml
+```
+#進到該資料夾
+linux/twistcli console export openshift \
+  --storage-class "prisma" \
+  --image-name "192.168.50.11/twistlock/console:console_21_04_412" \
+  --service-type "ClusterIP"
+```
+```
+#修改twistlock_console.yaml 加上imagepullsecret
+imagePullSecrets:
+- name: harbor-secret
+```
+```
+#建立imagePullSecrets yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: harbor-secret
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyIxOTIuMTY4LjUwLjExIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6IkFkbWluMTIzNDUiLCJhdXRoIjoiWVdSdGFXNDZRV1J0YVc0eE1qTTBOUT09In19fQ==
+```
+```
+#建立PV yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: twistlock-console
+  namespace: twistlock
+spec:
+  storageClassName: prisma
+  volumeMode: Filesystem
+  capacity:
+    storage: 100Gi       #指定大小
+  accessModes:
+  - ReadWriteOnce     #指定存取模式
+  persistentVolumeReclaimPolicy: Retain  
+  nfs:  #NFS的路徑以及IP位址
+    server: 192.168.50.11
+    path: /OCPNfs/prisma
+```
+
+### Step 3. 將step2的三隻yaml加入ocp
+```
+oc apply -f twistlock-PV.yml
+oc apply -f twistlock_console.yaml
+oc apply -f secret-harbor.yaml
+```
+
+### Step 4. 新增route
+```
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: twistlock-console
+  namespace: twistlock
+  labels:
+    name: console
+spec:
+  host: twistlock-console.olg
+  to:
+    kind: Service
+    name: twistlock-console
+    weight: 100
+  port:
+    targetPort: management-port-https
+  tls:
+    termination: passthrough
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+```
+
+### Step 5. 產生defender.yaml
+```
+#address: route的domain
+#cluster-address: loadbalance ip
+linux/twistcli defender export openshift \
+  --address https://twistlock-console/ \
+  --cluster-address 192.168.50.6 \
+  --image-name "192.168.50.11/twistlock/defender:defender_21_04_412" \
+  --cri
+```
+```
+oc apply -f defender.yaml
+```
