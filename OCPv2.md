@@ -649,6 +649,34 @@ oc login -u foo
 > Login successful.
 ```
 
+### 使用super-user pod
+```
+#創建serviceAccount
+oc create sa [name]
+
+#綁定serviceAccount至SCC privileged上 使此SA擁有特權
+oc adm policy add-scc-to-user privileged -z [name]
+```
+```
+#在pod spec底下 or 在deployment template spec底下
+#新增serviceAccountName\securityContext
+apiVersion: v1
+kind: Pod
+metadata:
+ name: nginx-pod
+ labels:
+   app: demoApp
+spec:
+  serviceAccountName: [SA name]
+  securityContext:
+    runAsUser: 0
+  containers:
+   - name: nginx-container
+     image: nginx
+     ports:
+       - containerPort: 8080
+```
+
 ## coreos.inst boot options for ISO install
 ### 注意這些參數不用換行 用空白隔開就好
 ### bootstrap:
@@ -821,7 +849,7 @@ spec:
 ### Step 5. 產生defender.yaml
 ```
 #address: route的domain
-#cluster-address: loadbalance ip
+#cluster-address: service cluster ip
 linux/twistcli defender export openshift \
   --address https://twistlock-console/ \
   --cluster-address 192.168.50.6 \
