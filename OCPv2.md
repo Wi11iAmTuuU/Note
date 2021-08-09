@@ -613,6 +613,23 @@ watch -n 1 oc get nodes
 #等待新增的node都ready即可
 watch -n 1 oc get nodes
 ```
+
+### 刪除節點
+```
+#將節點標記為不可調度
+oc adm cordon compute5.ocp.lab.com
+> node/compute5.ocp.lab.com cordoned
+
+#排空節點上的所有pod
+oc adm drain compute5.ocp.lab.com --force --delete-local-data --ignore-daemonsets
+> node/compute5.ocp.lab.com already cordoned
+> WARNING: ignoring DaemonSet-managed Pods: openshift-cluster-node-tuning-operator/tuned-4ddsf, openshift-dns/dns-default-9998g, openshift-image-registry/node-ca-zpmnm, openshift-machine-config-operator/machine-config-daemon-t7hlq, openshift-monitoring/node-exporter-7xl48, openshift-multus/multus-wnptt, openshift-sdn/ovs-6rfgd, openshift-sdn/sdn-7trsr
+
+#刪除節點
+oc delete nodes compute5.ocp.lab.com
+> node "compute5.ocp.lab.com" deleted
+```
+
 ### 增加更多user
 ```
 #新增新帳號密碼至dtpasswd檔案
@@ -683,60 +700,60 @@ spec:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.21:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.21:8080/bootstrap.ign 
-ip=192.168.50.201::192.168.50.253:255.255.255.0:bootstrap.ocp.olg.com:ens192:none 
-nameserver=192.168.50.249
+coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.26:8080/bootstrap.ign 
+ip=192.168.50.101::192.168.50.253:255.255.255.0:bootstrap.ocp.neo.com:ens192:none 
+nameserver=192.168.50.26
 ```
 
 ### master0:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.21:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.21:8080/master.ign 
-ip=192.168.50.202::192.168.50.253:255.255.255.0:master0.ocp.olg.com:ens192:none 
-nameserver=192.168.50.249
+coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.26:8080/master.ign 
+ip=192.168.50.102::192.168.50.253:255.255.255.0:master0.ocp.neo.com:ens192:none 
+nameserver=192.168.50.26
 ```
 
 ### master1:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.21:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.21:8080/master.ign 
-ip=192.168.50.203::192.168.50.253:255.255.255.0:master0.ocp.olg.com:ens192:none 
-nameserver=192.168.50.249
+coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.26:8080/master.ign 
+ip=192.168.50.103::192.168.50.253:255.255.255.0:master1.ocp.neo.com:ens192:none 
+nameserver=192.168.50.26
 ```
 
 ### master2:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.21:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.21:8080/master.ign 
-ip=192.168.50.204::192.168.50.253:255.255.255.0:master0.ocp.olg.com:ens192:none 
-nameserver=192.168.50.249
+coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.26:8080/master.ign 
+ip=192.168.50.104::192.168.50.253:255.255.255.0:master2.ocp.neo.com:ens192:none 
+nameserver=192.168.50.26
 ```
 
 ### compute0:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.21:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.21:8080/worker.ign 
-ip=192.168.50.207::192.168.50.253:255.255.255.0:compute0.ocp.olg.com:ens192:none 
-nameserver=192.168.50.249
+coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.26:8080/worker.ign 
+ip=192.168.50.105::192.168.50.253:255.255.255.0:compute0.ocp.olg.com:ens192:none 
+nameserver=192.168.50.26
 ```
 
 ### compute1:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.21:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.21:8080/worker.ign 
-ip=192.168.50.208::192.168.50.253:255.255.255.0:compute0.ocp.olg.com:ens192:none 
-nameserver=192.168.50.249
+coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.26:8080/worker.ign 
+ip=192.168.50.106::192.168.50.253:255.255.255.0:compute1.ocp.olg.com:ens192:none 
+nameserver=192.168.50.26
 ```
 
 ## coreos-installer安裝參數
