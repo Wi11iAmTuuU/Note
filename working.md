@@ -1,5 +1,4 @@
 # 工作紀錄
-![](https://i.imgur.com/Fsba7f6.png)
 
 ## 第一禮拜
 ### 一
@@ -703,12 +702,129 @@
 ### 五
 1. 釐清OCP 4.7 with windows container是否因UPI而無法使用(以確認只支援IPI)
 2. 研究OCP whats new in openshift 4.8(June 24, 2021) 簡報
-3. 學習安裝prisma cloud  twistlock console&twistlock defender
+3. 學習安裝prisma cloud twistlock console&twistlock defender
 ## 第四十五禮拜
 ### 一
-
+1. 週會
+2. 研究EFK index lifecycle management(ILM)與flentd串接
+3. 練習安裝prisma cloud twistlock console
+4. prisma cloud 釐清無法連上twistlock console原因(Neil測試連的上)
 ### 二
-
+1. 練習安裝prisma cloud twistlock console
+2. prisma cloud 釐清無法連上twistlock console原因
+3. 練習調整f5 dns
+### 三
+1. 練習安裝prisma cloud twistlock console
+2. prisma cloud 釐清無法連上twistlock console原因
+3. 釐清ocp 4.7 重啟後node異常原因
+### 四
+1. 釐清並解決ocp 4.7 重啟後node異常原因
+   - 進入master2查看kubelet log 發現etcd-quorum-guard readiness probe fail 研判etcd出問題
+   - 進到ocp openshit-etcd namespace發現 有一etcd-quorum-guard 狀態異常
+   - 及缺少etcd-master2.ocp.olg.com pod
+   - 依照官方文章Replacing an unhealthy etcd member處理
+   - 研判新起的master 因使用舊的etcd引發cluster無法正常運作
+### 五
+1. 釐清ocp 4.7 web console異常問題
+2. 重新架設ocp 4.7 cluster
+   - openshiftSDN
+   - F5 DNS
+   - haproxy
+## 第四十六禮拜
+### 一
+1. 週會
+2. 啟動並釐清ocp syc web console異常問題
+   - Cluster-Operator/openshift-apiserver available 為 false
+3. 安裝prisma cloud 於ocp4.7上
+   - twistlock console(完成)
+   - twistlock defender(調整Neil提供之參數後 完成)
+### 二
+1. 研究EFK kibana
+   - Index Lifecycle Policies
+   - Default route(一進kibana的畫面)
+   - security user(須設定elasticsearch.yml 寫入xpack.security相關設定)
+### 三
+1. 研究ELK elastic master/data node 架構概念
+2. 研究ELK kibana 與 master/data node 如何串接
+3. isco DevNet 資安社群研討會
+### 四
+1. 研究ELK kibana 與 master/data node 如何串接
+2. 研究ELK kibana security user/role
+### 五
+1. 研究ELK kibana 與 master/data node 如何串接
+2. 研究ELK kibana security user/role
+## 第四十七禮拜
+### 一
+1. 週會
+2. 研究ELK kibana 釐清並解決kibana測試區log未有新log問題(之前調整xpack.security fluentd未設定帳號密碼)
+3. 研究ELK kibana user role space 結合使用
+### 二
+1. 研究ELK kibana Cross-cluster search
+2. 架設kibana串elasticsearch cluster
+### 三
+1. 研究ELK kibana user role space 結合使用
+## 第四十八禮拜
+### 一
+1. 研究OCP argoCD cross cluster
+2. 研究OCP 4.8 release notes
+### 二
+1. 研究OCP argoCD cross cluster
+### 三
+1. 研究OCP argoCD cross cluster
+2. 研究OCP 4.5 cluster with 官方版argocd
+3. 官方版argocd 帳號設定
+### 四
+1. 架設OCP4.6 cluster(neo)
+2. 測試OCP4.6 cluster with 官方版argocd
+3. 測試OCP4.7 cluster with 官方版argocd
+### 五
+1. 測試argoCD cross OCP 4.6/4.7 cluster
+2. 研究argoCD user role
+3. 測試argoCD operator(成功 但預設帳號密碼未知)
+## 第四十九禮拜
+### 一
+1. 研究OCP with Argocd Operator
+   - 找Argocd admin Default密碼(Secret argocd-operator-cluster)
+   - 測試關閉admin帳號登入(從Operator那裏下手 YAML檔spec中加入disableAdmin: true)
+### 二
+1. 研究OCP statefulSet 概念
+2. 測試官方版argoCD使用openshift OAuth登入(修改argocd-cm)
+### 三
+1. 測試OCP with 官方版argoCD使用openshift OAuth登入(修改argocd-cm)
+2. 研究OCP prune images
+3. 研究statefulSet 概念
+### 四
+1. 研究OCP 測試argoCD operator
+2. 研究statefulSet 概念
+## 第五十禮拜
+### 一
+1. 恢復OCP 4.6/4.7環境
+2. 研究OCP port-forward概念
+3. 研究OCP troubleshooting SOP
+### 二
+1. 恢復OCP syc(4.5)環境
+2. devdays asia velero課程
+3. 研究OCP troubleshooting SOP
+### 三
+1. 研究OCP troubleshooting SOP
+   - 單獨研判pod中服務正常
+   - 測試使用工具pod打API判斷pod服務正常
+2. 研究cisco intersight intersight kubernetes service
+### 四
+1. 研究cisco intersight
+   - intersight kubernetes service(需使用vCenter)
+   - target HTTP Endpoint(可提供給Orchestration Workflow使用)
+### 五
+1. 研究cisco intersight Orchestration workflow(自定義自動化流程)
+## 第五十一禮拜
+### 一
+1. 研究OCP troubleshooting SOP
+   - 使用Web Console Troubleshooting
+   - 單獨研判pod中服務正常(利用container terminal curl api)
+### 二
+1. 研究OCP troubleshooting SOP 使用Web Console Troubleshooting
+2. 研究quay with object storage
+3. 安裝minio
 ### 三
 
 ### 四
@@ -716,10 +832,11 @@
 ### 五
 
 
-
 **Tmep**
 研究零信任架構
-elk冷溫熱三區...
+kibana 帳號
+使用者進入畫面為dashboard/Canvas
+
 
 ## 開會
 容器安全(輔助security team)
@@ -742,33 +859,32 @@ ServiceMesh
 
 ---
 
-Hi All (2021-7-12):
+Hi All (2021-8-6):
 1. 昨日進行的項目:
-    1.1 釐清OCP 4.7 with windows container是否因UPI而無法使用(以確認只支援IPI)
-    1.2 研究OCP 4.8
-        - whats new in openshift 4.8(June 24, 2021) 簡報
-    1.2 學習安裝prisma cloud 
-        - twistlock console
-        - twistlock defender
+    1.1 安裝minio on linux podman
+    1.2 研究OCP troubleshooting SOP
+        - 使用Web Console Troubleshooting
+    1.3 研究minio串NetApp ontap s3
 2. 今天預計進行的項目:
-    2.1 研究EFK
-        - Hot-Warm Architecture
+    2.1 研究minio串NetApp ontap s3
+    2.2 研究OCP troubleshooting SOP
+        - 使用Web Console Troubleshooting
+        - 單獨研判pod中服務正常
+        - 單獨研判svc串pod後服務正常
+    2.3 研究ELK kibana Canvas
 3. 待解決問題:
     3.1 無
 
 ---
 
-Hi All (2021-7-5):
+Hi All (2021-8-2):
 1. 上周五進行的項目:
-    1.1 釐清ocp 4.7 with windows container是否因UPI而無法使用(以確認只支援IPI)
-    1.2 研究OCP 4.8
-        - whats new in openshift 4.8(June 24, 2021) 簡報
-    1.2 學習安裝prisma cloud 
-        - twistlock console
-        - twistlock defender
+    1.1 休假
 2. 今天預計進行的項目:
-    2.1 研究EFK
-        - Hot-Warm Architecture
+    2.1 研究OCP
+        - how etcd works
+        - OCP 4.8 release notes
+        - argoCD cross cluster
 3. 待解決問題:
     3.1 無
 
