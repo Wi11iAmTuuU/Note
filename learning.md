@@ -122,6 +122,20 @@ kubernetes內建taint
 - node.kubernetes.io/disk-pressure :Node磁碟空間快要耗盡
 - node.kubernetes.io/network-unavailable :Node網路有問題
 - node.kubernetes.io/unschedulable :無法分派 pod 到該 node
+
+**probe**
+分為Liveness, Readiness, Startup三種。
+- Liveness probe :偵測container是否存活，判定死亡就重啟container。
+- Readiness probe :偵測container是否可讀取，判定不可讀取就使service流量不進入該container。
+- Startup probe :偵測container是否存活，判定死亡就重啟container，初始優先度高於liveness probe，再Startup probe判定為成功後才讓liveness probe接手。
+
+探針擁有下列參數 
+- initialDelaySeconds :初始幾秒進行第一次偵測
+- periodSeconds :第一次偵測後，每個幾秒偵測一次
+- timeoutSeconds :偵測時延遲幾秒進行判定 
+- successThreshold: 成功幾次算成功
+- failureThreshold: 失敗幾次算失敗
+
 ### yaml檔說明
 **apiVersion**
 Kubernetes Api版本。
@@ -410,6 +424,8 @@ status:
 **重啟container**
 ```
 $ kubectl rollout restart [deploment/daemont/pod name]
+OR
+$ kubectl rollout restart deploment/daemontset -n [namespace] 
 ```
 **進入container bash**
 ```
@@ -421,11 +437,11 @@ $ oc rsh [pod name]
 **客製化顯示pod資訊**
 顯示node name及pod name並以node name排序
 ```
-kubectl get pod -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name --all-namespaces | sort
+$ kubectl get pod -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name --all-namespaces | sort
 ```
 **神奇指令**
 ```
-oc get pods --all-namespaces| grep Evicted | $(awk '{print "oc -n " $1 " delete pod "$2}')
+$ oc get pod --all-namespaces  | awk '{if ($4=="Evicted") print "oc delete pod " $2 " -n " $1;}' | sh
 ```
 ## 環境安裝(安裝kubeadm在CentOS上為例)
 ### 必備資源
@@ -584,6 +600,45 @@ echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
 echo 1 > /proc/sys/net/bridge/bridge-nf-call-ip6tables
 ```
 ## 進階資訊
+### Highly Available clusters with kubeadm
+**Node需求**
+```
+至少三個master
+至少三個worker
+```
+**Step 1. Load Balancer準備**
+```
+建立一台LB供 kube-apiserver使用
+使用haproxy or nginx等等
+LB三台master ip:6443 port
+```
+**Step 2. 事前準備**
+```
+與上方安裝步驟相同
+先安裝kubeadm kubelet kubectl
+及container runtime等等
+```
+**Step 3. kubeadm init**
+```
+sudo kubeadm init --control-plane-endpoint "LOAD_BALANCER_IP:LOAD_BALANCER_PORT" --upload-certs
+
+LOAD_BALANCER_IP: Step 1的IP
+LOAD_BALANCER_PORT: Step 1的Port
+--upload-certs: 自動設定certificates 喜歡手動的可以不要加
+--pod-network-cidr 有的CNI需要設定
+```
+```
+輸出範例:
+You can now join any number of control-plane node by running the following command on each as a root:
+    kubeadm join 192.168.0.200:6443 --token 9vr73a.a8uxyaju799qwdjv --discovery-token-ca-cert-hash sha256:7c2e69131a36ae2a042a339b33381c6d0d43887e2de83720eff5359e26aec866 --control-plane --certificate-key f8902e114ef118304e561c3ecd4d0b543adc226b7a07f675f56564185ffe0c07
+
+Please note that the certificate-key gives access to cluster sensitive data, keep it secret!
+As a safeguard, uploaded-certs will be deleted in two hours; If necessary, you can use kubeadm init phase upload-certs to reload certs afterward.
+
+Then you can join any number of worker nodes by running the following on each as root:
+    kubeadm join 192.168.0.200:6443 --token 9vr73a.a8uxyaju799qwdjv --discovery-token-ca-cert-hash sha256:7c2e69131a36ae2a042a339b33381c6d0d43887e2de83720eff5359e26aec866
+```
+
 ### Kubernetes CI/CD
 **GitOps**
 ![](https://i.imgur.com/0HmoCX1.png)
