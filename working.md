@@ -826,17 +826,45 @@
 2. 研究quay with object storage
 3. 安裝minio
 ### 三
-
+1. 安裝minio on linux podman
+2. 研究OCP troubleshooting SOP 使用Web Console Troubleshooting
+3. 研究minio串NetApp ontap s3
 ### 四
-
+1. 研究minio串NetApp ontap
+2. 研究OCP troubleshooting SOP
+   - 使用Web Console Troubleshooting
+   - 單獨研判pod中服務正常
+### 五
+1. 研究minio串NetApp ontap
+2. 研究OCP troubleshooting SOP
+   - 使用Web Console Troubleshooting
+## 第五十二禮拜
+### 一
+1. 熟悉OCP Web Console功能
+2. 使用OCP Web Console Troubleshooting
+### 二
+1. 熟悉OCP Web Console功能
+2. 測試OCP Web Console Customize Logo(成功於neo cluster)
+3. 研究quay 安裝步驟
+### 三
+1. 熟悉OCP Web Console功能
+2. 研究oc debug功能
+3. 研究kubernetes HA cluster
+### 四
+1. AWS Summit Online - Taiwan
+2. 熟悉OCP Web Console功能
+3. 研究OCP Understanding pod error states
 ### 五
 
 
+**三個人格特質**
+* 品質跟負責任得態度 
+* 教會新人的能力(給人魚吃 不如教他釣魚)
+* 講話要講重點(不要講太深 要讓人聽懂)
+
 **Tmep**
 研究零信任架構
-kibana 帳號
 使用者進入畫面為dashboard/Canvas
-
 
 ## 開會
 容器安全(輔助security team)
@@ -861,16 +889,16 @@ ServiceMesh
 
 Hi All (2021-8-6):
 1. 昨日進行的項目:
-    1.1 安裝minio on linux podman
-    1.2 研究OCP troubleshooting SOP
-        - 使用Web Console Troubleshooting
-    1.3 研究minio串NetApp ontap s3
+    1.1 研究OCP
+        - 熟悉Web Console功能
+        - Understanding pod error states
+    1.2 研究rancher
 2. 今天預計進行的項目:
-    2.1 研究minio串NetApp ontap s3
-    2.2 研究OCP troubleshooting SOP
-        - 使用Web Console Troubleshooting
+    2.1 研究OCP troubleshooting SOP
+        - 單純使用Web Console
         - 單獨研判pod中服務正常
         - 單獨研判svc串pod後服務正常
+    2.2 研究quay
     2.3 研究ELK kibana Canvas
 3. 待解決問題:
     3.1 無
