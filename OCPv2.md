@@ -1,4 +1,4 @@
-# OCP4.6/4.7筆記
+# OCP安裝筆記
 
 OCP集群中機器分為四種
 
@@ -431,16 +431,19 @@ The DNS server
 #輸入以下指令 沒有換行
 #bootstrap範例:
 sudo coreos-installer install /dev/sda 
+--insecure --insecure-ignition -n
 --ignition_url=http://10.255.78.XX:8080/bootstrap.ign
 --image-url=http://10.255.78.XX:8080/rhcos.raw.gz 
 
 #master範例:
 sudo coreos-installer install /dev/sda 
+--insecure --insecure-ignition -n
 --ignition_url=http://10.255.78.XX:8080/master.ign
 --image-url=http://10.255.78.XX:8080/rhcos.raw.gz 
 
 #compute範例:
 sudo coreos-installer install /dev/sda 
+--insecure --insecure-ignition -n 
 --ignition_url=http://10.255.78.XX:8080/worker.ign
 --image-url=http://10.255.78.XX:8080/rhcos.raw.gz 
 ```
@@ -463,6 +466,8 @@ sudo coreos-installer install /dev/sda
 ```
 #導出kubeadmin憑證
 export KUBECONFIG=/root/ocp-data/auth/kubeconfig
+或者
+cp /root/ocp-data/auth/kubeconfig /root/.kube/config
 
 #查看使用者 輸出為system:admin即可
 oc whoami
@@ -620,6 +625,10 @@ watch -n 1 oc get nodes
 oc adm cordon compute5.ocp.lab.com
 > node/compute5.ocp.lab.com cordoned
 
+#將節點標記為可調度
+oc adm uncordon compute5.ocp.lab.com
+> node/compute5.ocp.lab.com uncordoned
+
 #排空節點上的所有pod
 oc adm drain compute5.ocp.lab.com --force --delete-local-data --ignore-daemonsets
 > node/compute5.ocp.lab.com already cordoned
@@ -694,6 +703,17 @@ spec:
        - containerPort: 8080
 ```
 
+### 虛擬化Node extend disk size
+```
+sudo su
+growpart /dev/sda 4
+sudo su -
+unshare --mount
+mount -o remount,rw /sysroot
+xfs_growfs /sysroot
+```
+
+
 ## coreos.inst boot options for ISO install
 ### 注意這些參數不用換行 用空白隔開就好
 ### bootstrap:
@@ -761,6 +781,7 @@ nameserver=192.168.50.26
 ### bootstrap:
 ```
 sudo coreos-installer install /dev/sda 
+--insecure --insecure-ignition -n
 --ignition-url=http://192.168.50.6:8080/bootstrap.ign
 --image-url=http://192.168.50.6:8080/rhcos.raw.gz 
 ```
@@ -768,6 +789,7 @@ sudo coreos-installer install /dev/sda
 ### master:
 ```
 sudo coreos-installer install /dev/sda 
+--insecure --insecure-ignition -n 
 --ignition-url=http://192.168.50.6:8080/master.ign
 --image-url=http://192.168.50.6:8080/rhcos.raw.gz 
 ```
@@ -775,6 +797,7 @@ sudo coreos-installer install /dev/sda
 ### compute:
 ```
 sudo coreos-installer install /dev/sda 
+--insecure --insecure-ignition -n
 --ignition-url=http://192.168.50.6:8080/worker.ign
 --image-url=http://192.168.50.6:8080/rhcos.raw.gz 
 ```
@@ -875,4 +898,158 @@ linux/twistcli defender export openshift \
 ```
 ```
 oc apply -f defender.yaml
+```
+
+## 本次
+```
+coreos.inst.install_dev=sda 
+coreos.inst.image_url=http://10.250.128.40:8080/rhcos.raw.gz
+coreos.inst.ignition_url=http://10.250.128.40:8080/bootstrap.ign 
+ip=10.255.83.60::10.255.83.253:255.255.255.0:bootstrap.ocp.lab.com:ens192:none
+nameserver=10.250.128.40
+```
+
+```
+coreos.inst.install_dev=sda 
+coreos.inst.image_url=http://10.250.128.40:8080/rhcos.raw.gz
+coreos.inst.ignition_url=http://10.250.128.40:8080/master.ign 
+ip=10.255.83.61::10.255.83.253:255.255.255.0:master0.ocp.lab.com:ens192:none
+nameserver=10.250.128.40
+```
+
+```
+coreos.inst.install_dev=sda 
+coreos.inst.image_url=http://10.250.128.40:8080/rhcos.raw.gz
+coreos.inst.ignition_url=http://10.250.128.40:8080/worker.ign 
+ip=10.255.83.61::10.255.83.253:255.255.255.0:compute0.ocp.lab.com:ens192:none
+nameserver=10.250.128.40
+```
+
+## mirror ocp image
+### 完整步驟
+#### step 1. Pull Secret設定
+1. 下載 Pull Secret
+2. 將Pull Secret轉成json
+``` shell
+$ cat ./pull-secret.txt | jq . > [path]/[file name]
+```
+
+3. 將Private Registry帳密轉base64
+``` shell
+$ echo -n '<user_name>:<password>' | base64 -w0
+```
+
+4. 將Private Registry資訊放入Pull Secret json
+credentials為上一步的base64
+``` json
+  "auths": {
+    "<mirror_registry>": { 
+      "auth": "<credentials>", 
+      "email": "you@example.com"
+  },
+```
+#### step 2. 環境變數設定
+1. OCP版本
+``` shell
+$ OCP_RELEASE=<release_version>
+```
+
+2.  registry name / port
+``` shell
+$ LOCAL_REGISTRY='<local_registry_host_name>:<local_registry_host_port>'
+```
+
+3. repository name (harbor請用兩層 EX: openshift/release)
+``` shell
+LOCAL_REPOSITORY='<local_repository_name>'
+```
+
+4. mirror的來源
+``` shell 
+$ PRODUCT_REPO='openshift-release-dev'
+```
+
+5. pull secret位置
+``` shell
+$ LOCAL_SECRET_JSON='<path_to_pull_secret>'
+```
+
+6. release mirror
+``` shell 
+$ RELEASE_NAME="ocp-release"
+```
+
+7. server架構 (EX: x86_64)
+``` shell
+$ ARCHITECTURE=<server_architecture>
+```
+
+8. mirrored images本地儲存位置
+``` shell
+$ REMOVABLE_MEDIA_PATH=<path>
+```
+
+#### step 3. mirror images
+* 逐步mirror
+    1. 查看要mirror的images和配置清單
+    ``` shell
+    $ oc adm release mirror -a ${LOCAL_SECRET_JSON}  \
+         --from=quay.io/${PRODUCT_REPO}/${RELEASE_NAME}:${OCP_RELEASE}-${ARCHITECTURE} \
+         --to=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY} \
+         --to-release-image=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY}:${OCP_RELEASE}-${ARCHITECTURE} --dry-run
+    ```
+    
+    2. Mirror images到Loacl
+    ``` shell 
+    $ oc adm release mirror -a ${LOCAL_SECRET_JSON} --to-dir=${REMOVABLE_MEDIA_PATH}/mirror quay.io/${PRODUCT_REPO}/${RELEASE_NAME}:${OCP_RELEASE}-${ARCHITECTURE}
+    ```
+    
+    3. Mirror images 從Local到Private Registry
+    ``` shell
+    $ oc image mirror -a ${LOCAL_SECRET_JSON} --from-dir=${REMOVABLE_MEDIA_PATH}/mirror "file://openshift/release:${OCP_RELEASE}*" ${LOCAL_REGISTRY}/${LOCAL_REPOSITORY} --insecure
+    ```
+
+* 一次性mirror
+    1. 一步到位
+    ``` shell
+    $ oc adm release mirror -a ${LOCAL_SECRET_JSON} --from=quay.io/${PRODUCT_REPO}/${RELEASE_NAME}:${OCP_RELEASE}-${ARCHITECTURE} --to=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY} --to-release-image=${LOCAL_REGISTRY}/${LOCAL_REPOSITORY}:${OCP_RELEASE}-${ARCHITECTURE} --insecure
+    ```
+
+#### step 4. 將image固定成release
+* mirror host 沒網路連接
+``` shell
+$ oc adm release extract -a ${LOCAL_SECRET_JSON} --command=openshift-install "${LOCAL_REGISTRY}/${LOCAL_REPOSITORY}:${OCP_RELEASE}"
+```
+* local container registry 可連接到 mirror host
+``` shell
+$ oc adm release extract -a ${LOCAL_SECRET_JSON} --command=openshift-install "${LOCAL_REGISTRY}/${LOCAL_REPOSITORY}:${OCP_RELEASE}-${ARCHITECTURE}"
+```
+
+#### 需加入到install-config.yaml的資訊
+```
+To use the new mirrored repository to install, add the following section to the install-config.yaml:
+
+imageContentSources:
+- mirrors:
+  - 192.168.50.11/openshift-release
+  source: quay.io/openshift-release-dev/ocp-release
+- mirrors:
+  - 192.168.50.11/openshift-release
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+
+
+To use the new mirrored repository for upgrades, use the following to create an ImageContentSourcePolicy:
+
+apiVersion: operator.openshift.io/v1alpha1
+kind: ImageContentSourcePolicy
+metadata:
+  name: example
+spec:
+  repositoryDigestMirrors:
+  - mirrors:
+    - 192.168.50.11/openshift-release
+    source: quay.io/openshift-release-dev/ocp-release
+  - mirrors:
+    - 192.168.50.11/openshift-release
+    source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
 ```
