@@ -1,3 +1,4 @@
+###### tags: `openshift`
 # OCP安裝筆記
 
 OCP集群中機器分為四種
@@ -713,10 +714,10 @@ mount -o remount,rw /sysroot
 xfs_growfs /sysroot
 ```
 
-
-## coreos.inst boot options for ISO install
-### 注意這些參數不用換行 用空白隔開就好
-### bootstrap:
+## -----安裝指令-----
+### coreos.inst boot options for ISO install
+==※ 注意這些參數不用換行 用空白隔開就好==
+#### bootstrap:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
@@ -726,7 +727,7 @@ ip=192.168.50.101::192.168.50.253:255.255.255.0:bootstrap.ocp.neo.com:ens192:non
 nameserver=192.168.50.26
 ```
 
-### master0:
+#### master0:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
@@ -736,7 +737,7 @@ ip=192.168.50.102::192.168.50.253:255.255.255.0:master0.ocp.neo.com:ens192:none
 nameserver=192.168.50.26
 ```
 
-### master1:
+#### master1:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
@@ -746,7 +747,7 @@ ip=192.168.50.103::192.168.50.253:255.255.255.0:master1.ocp.neo.com:ens192:none
 nameserver=192.168.50.26
 ```
 
-### master2:
+#### master2:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
@@ -756,7 +757,7 @@ ip=192.168.50.104::192.168.50.253:255.255.255.0:master2.ocp.neo.com:ens192:none
 nameserver=192.168.50.26
 ```
 
-### compute0:
+#### compute0:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
@@ -766,7 +767,7 @@ ip=192.168.50.105::192.168.50.253:255.255.255.0:compute0.ocp.olg.com:ens192:none
 nameserver=192.168.50.26
 ```
 
-### compute1:
+#### compute1:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
@@ -776,9 +777,9 @@ ip=192.168.50.106::192.168.50.253:255.255.255.0:compute1.ocp.olg.com:ens192:none
 nameserver=192.168.50.26
 ```
 
-## coreos-installer安裝參數
-### 注意這些參數不用換行 用空白隔開就好
-### bootstrap:
+### coreos-installer安裝參數
+==※ 注意這些參數不用換行 用空白隔開就好==
+#### bootstrap:
 ```
 sudo coreos-installer install /dev/sda 
 --insecure --insecure-ignition -n
@@ -786,7 +787,7 @@ sudo coreos-installer install /dev/sda
 --image-url=http://192.168.50.6:8080/rhcos.raw.gz 
 ```
 
-### master:
+#### master:
 ```
 sudo coreos-installer install /dev/sda 
 --insecure --insecure-ignition -n 
@@ -794,13 +795,36 @@ sudo coreos-installer install /dev/sda
 --image-url=http://192.168.50.6:8080/rhcos.raw.gz 
 ```
 
-### compute:
+#### compute:
 ```
 sudo coreos-installer install /dev/sda 
 --insecure --insecure-ignition -n
 --ignition-url=http://192.168.50.6:8080/worker.ign
 --image-url=http://192.168.50.6:8080/rhcos.raw.gz 
 ```
+
+## -----特殊指令-----
+### 批次刪除pod
+```shell
+$oc get pod --all-namespaces  | awk '{if ($4=="Evicted") print "oc delete pod " $2 " -n " $1;}' | sh
+```
+
+### Project卡Terminating移除法
+```shell
+$kubectl get ns [namespace] -o json > [namespace].json
+$vim [namespace].json
+```
+刪除spec中finalizers內容
+```
+"spec": {
+    "finalizers": [
+   ]
+},
+```
+```shell
+$kubectl replace --raw "/api/v1/namespaces/[namespaces]/finalize" -f ./[namespaces].json
+```
+
 
 ## Troubleshooting
 ![](https://i.imgur.com/UUh5FaM.png)
@@ -898,31 +922,6 @@ linux/twistcli defender export openshift \
 ```
 ```
 oc apply -f defender.yaml
-```
-
-## 本次
-```
-coreos.inst.install_dev=sda 
-coreos.inst.image_url=http://10.250.128.40:8080/rhcos.raw.gz
-coreos.inst.ignition_url=http://10.250.128.40:8080/bootstrap.ign 
-ip=10.255.83.60::10.255.83.253:255.255.255.0:bootstrap.ocp.lab.com:ens192:none
-nameserver=10.250.128.40
-```
-
-```
-coreos.inst.install_dev=sda 
-coreos.inst.image_url=http://10.250.128.40:8080/rhcos.raw.gz
-coreos.inst.ignition_url=http://10.250.128.40:8080/master.ign 
-ip=10.255.83.61::10.255.83.253:255.255.255.0:master0.ocp.lab.com:ens192:none
-nameserver=10.250.128.40
-```
-
-```
-coreos.inst.install_dev=sda 
-coreos.inst.image_url=http://10.250.128.40:8080/rhcos.raw.gz
-coreos.inst.ignition_url=http://10.250.128.40:8080/worker.ign 
-ip=10.255.83.61::10.255.83.253:255.255.255.0:compute0.ocp.lab.com:ens192:none
-nameserver=10.250.128.40
 ```
 
 ## mirror ocp image
