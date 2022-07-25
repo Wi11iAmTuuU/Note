@@ -1,20 +1,29 @@
 ###### tags: `openshift`
-# OCP安裝筆記
+# OCP筆記
 
-OCP集群中機器分為四種
+## -----架構說明-----
+* OCP集群中機器分為四種
 
-```
-bastion(操作機) X1
---------------------
-bootstrap      X1
-master node    X3
-compute node   X2
-```
-設備要求
+| 機器名稱        | 數量 |
+|:--------------- |:----:|
+| bastion(操作機) |  1   |
+| bootstrap       |  1   |
+| master node     |  3   |
+| compute node    |  3   |
+
+
+* 最低設備要求
 ```
 bootstrap CPU: 4 core RAM: 16 G 
 master    CPU: 4 core RAM: 16 G 
 worker    CPU: 2 core RAM: 8 G 
+```
+
+* 設備要求
+```
+bootstrap CPU: 4 core RAM: 16 G 
+master    CPU: 8 core RAM: 24 G 
+worker    CPU: 8 core RAM: 24 G 
 ```
 
 ## -----建立bastion-----
@@ -100,7 +109,7 @@ address=/etcd-2.ocp.[name].com/10.255.83.**
 address=/compute0.ocp.[name].com/10.255.83.##
 address=/compute1.ocp.[name].com/10.255.83.##
 ```
-```
+```shell
 #啟用dnsmasq
 systemctl enable dnsmasq 
 
@@ -202,7 +211,7 @@ Listen 80
 #改為
 Listen 8080
 ```
-```
+```shell
 #啟用httpd
 systemctl enable httpd
 
@@ -216,14 +225,14 @@ systemctl status httpd
 ### 修改resolv.conf 
 ```
 #修改/etc/resolv.conf
-#修改內容為下 取代所有原有內容
-search dynakumo.local ocp.[name].com
-nameserver 10.255.78.XX
+#修改內容為下 新增
+search ocp.[name].com
+nameserver [DNSserver.ip]
 ```
 
 ### 生成SSH私鑰並將其添加到代理 
-```
-#產生ssh key
+```shell
+#產生ssh key (二擇一)
 ssh-keygen -t rsa -b 4096 -N ''
 ssh-keygen -t ed25519 -N ''
 
@@ -233,6 +242,18 @@ eval "$(ssh-agent -s)"
 #將您的SSH私鑰添加到ssh-agent
 ssh-add /root/.ssh/id_rsa
 ssh-add /root/.ssh/id_ed25519
+```
+
+### 設定bashrc
+```
+# oc command autocomplete
+source <(kubectl completion bash)
+source <(oc completion bash)
+alias k=kubectl
+complete -F __start_kubectl k
+
+# oc login setting
+export KUBECONFIG=/root/ocp-data/auth/kubeconfig
 ```
 
 ## -----安裝新cluster-----
@@ -253,7 +274,7 @@ ssh-add /root/.ssh/id_ed25519
 ```
 
 ### 安裝client(oc 指令工具)
-```
+```shell
 #解壓縮client
 tar zxvf /root/openshift-client-linux-4.5.6.tar.gz
 
@@ -279,7 +300,7 @@ oc
 ```
 
 ### 創建安裝配置文件
-```
+```shell
 #解壓縮openshift-install工具
 tar zxvf /root/openshift-install-linux-4.5.6.tar.gz
 
@@ -289,7 +310,7 @@ mkdir /root/ocp-data
 #創建OCP的安裝設定文件
 touch /root/ocp-data/install-config.yaml
 ```
-```
+```yaml
 #修改/root/ocp-data/install-config.yaml
 #填入內容如下 並修改
 apiVersion: v1
@@ -340,7 +361,7 @@ sshKey: 'ssh-ed25519 AAAA...'
 ```
 #修改 /root/ocp-data/manifests/cluster-network-03-config.yml
 ```
-```
+```yaml
 apiVersion: operator.openshift.io/v1
 kind: Network
 metadata:
@@ -356,7 +377,7 @@ spec:
 ```
 
 ### 創建ignition文件
-```
+```shell
 #創建ignition文件
 #注意ignition憑證只有24小時，必須在24小時內將cluster建好(待確認)
 /root/openshift-install create ignition-configs --dir=/root/ocp-data
@@ -419,7 +440,7 @@ nameserver=192.168.50.XX
 ```
 
 4.6版rhcos(live)安裝方法
-```
+```shell
 #連線[OCP] RHCOS 4.6.8 VM 開啟主控台
 #先設定網路相關(nmcli/nmtui)
 
@@ -450,7 +471,7 @@ sudo coreos-installer install /dev/sda
 ```
 
 ### 創建集群監控boostrap創建集群過程
-```
+```shell
 #監控boostrap創建集群過程
 /root/openshift-install --dir=/root/ocp-data/ wait-for bootstrap-complete --log-level=info
 
@@ -464,18 +485,16 @@ sudo coreos-installer install /dev/sda
 ```
 
 ### 使用 CLI 登入到集群
-```
+```shell
 #導出kubeadmin憑證
 export KUBECONFIG=/root/ocp-data/auth/kubeconfig
-或者
-cp /root/ocp-data/auth/kubeconfig /root/.kube/config
 
 #查看使用者 輸出為system:admin即可
 oc whoami
 ```
 
 ### 批准所有機器的CSR
-```
+```shell
 #查看node、csr及批准所有機器的CSR
 oc get nodes
 oc get csr
@@ -486,7 +505,7 @@ watch -n 1 oc get nodes
 ```
 
 ### 初始Operator配置
-```
+```shell
 #查看組件 直到所有組件都出現版本號為止
 watch -n5 oc get clusteroperators
 
@@ -495,7 +514,7 @@ oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patc
 ```
 
 ### 初始User設定
-```
+```shell
 #利用htpasswd新增User
 htpasswd -c -B -b /root/users.htpasswd [Name] [password]
 
@@ -504,10 +523,10 @@ oc create secret generic htpass-secret --from-file=htpasswd=/root/users.htpasswd
 
 #將帳密secret綁到登入器裡
 #創建密碼相關設定文件
-touch /root/CR
+vi /root/OAuth.yaml
 ```
-```
-#修改/root/CR內容如下
+```yaml
+#修改/root/OAuth.yaml內容如下
 apiVersion: config.openshift.io/v1
 kind: OAuth
 metadata:
@@ -521,12 +540,15 @@ spec:
       fileData:
         name: htpass-secret
 ```
-```
-#將/root/CR設定進OCP
-oc apply -f /root/CR
+```shell
+#將/root/OAuth.yaml設定進OCP
+oc apply -f /root/OAuth.yaml
 
 #提升user權限至cluster-admin
 oc adm policy add-cluster-role-to-user cluster-admin [Name] --rolebinding-name=cluster-admin
+
+#集體提權至cluster-admin (已登入使用者)
+oc get user --no-headers=true | awk '{print "oc adm policy add-cluster-role-to-user cluster-admin " $1 " --rolebinding-name=cluster-admin";}' | sh
 ```
 
 ### 添加hosts來登入web-console
@@ -606,7 +628,7 @@ nameserver=192.168.50.XX
 #等到RHCOS跑完
 #如有錯誤 則會出現等待五分鐘後自動重啟 等待重啟後即可再次嘗試
 ```
-```
+```shell
 # 回到bastion上 登入
 oc login
 
@@ -621,7 +643,7 @@ watch -n 1 oc get nodes
 ```
 
 ### 刪除節點
-```
+```shell
 #將節點標記為不可調度
 oc adm cordon compute5.ocp.lab.com
 > node/compute5.ocp.lab.com cordoned
@@ -641,7 +663,7 @@ oc delete nodes compute5.ocp.lab.com
 ```
 
 ### 增加更多user
-```
+```shell
 #新增新帳號密碼至dtpasswd檔案
 htpasswd -bB /root/users.htpasswd [name] [password]
 
@@ -653,7 +675,7 @@ oc adm policy add-cluster-role-to-user cluster-admin [Name] --rolebinding-name=c
 ```
 
 oc login時如遇到`Error from server (InternalError): Internal error occurred: unexpected response: 500`
-```
+```shell
 #先刪除該帳號
 oc delete user foo
 > user "foo" deleted
@@ -677,14 +699,14 @@ oc login -u foo
 ```
 
 ### 使用super-user pod
-```
+```shell
 #創建serviceAccount
 oc create sa [name]
 
 #綁定serviceAccount至SCC privileged上 使此SA擁有特權
 oc adm policy add-scc-to-user privileged -z [name]
 ```
-```
+```yaml
 #在pod spec底下 or 在deployment template spec底下
 #新增serviceAccountName\securityContext
 apiVersion: v1
@@ -705,13 +727,33 @@ spec:
 ```
 
 ### 虛擬化Node extend disk size
-```
+```shell
 sudo su
 growpart /dev/sda 4
 sudo su -
 unshare --mount
 mount -o remount,rw /sysroot
 xfs_growfs /sysroot
+```
+
+### 修改Console Logo
+```shell
+$oc create configmap console-custom-logo --from-file /path/to/console-custom-logo.png -n openshift-config
+```
+```shell
+$ oc edit consoles.operator.openshift.io cluster
+```
+```yaml
+apiVersion: operator.openshift.io/v1
+kind: Console
+metadata:
+  name: cluster
+spec:
+  customization:
+    customLogoFile:
+      key: console-custom-logo.png
+      name: console-custom-logo
+    customProductName: My Console
 ```
 
 ## -----安裝指令-----
@@ -780,7 +822,7 @@ nameserver=192.168.50.26
 ### coreos-installer安裝參數
 ==※ 注意這些參數不用換行 用空白隔開就好==
 #### bootstrap:
-```
+```shell
 sudo coreos-installer install /dev/sda 
 --insecure --insecure-ignition -n
 --ignition-url=http://192.168.50.6:8080/bootstrap.ign
@@ -788,7 +830,7 @@ sudo coreos-installer install /dev/sda
 ```
 
 #### master:
-```
+```shell
 sudo coreos-installer install /dev/sda 
 --insecure --insecure-ignition -n 
 --ignition-url=http://192.168.50.6:8080/master.ign
@@ -796,7 +838,7 @@ sudo coreos-installer install /dev/sda
 ```
 
 #### compute:
-```
+```shell
 sudo coreos-installer install /dev/sda 
 --insecure --insecure-ignition -n
 --ignition-url=http://192.168.50.6:8080/worker.ign
@@ -808,8 +850,11 @@ sudo coreos-installer install /dev/sda
 ```shell
 $oc get pod --all-namespaces  | awk '{if ($4=="Evicted") print "oc delete pod " $2 " -n " $1;}' | sh
 ```
+```shell
+$oc get pod --all-namespaces  | awk '{if ($4=="Terminating") print "oc delete pod " $2 " -n " $1 " --force";}' | sh
+```
 
-### Project卡Terminating移除法
+### Project卡Terminating移除法(暴力)
 ```shell
 $kubectl get ns [namespace] -o json > [namespace].json
 $vim [namespace].json
@@ -832,97 +877,11 @@ $kubectl replace --raw "/api/v1/namespaces/[namespaces]/finalize" -f ./[namespac
 ![](https://i.imgur.com/1TLcHiJ.png)
 ![](https://i.imgur.com/nJYkJm1.png)
 
-## prisma cloud(twistlock)
-### Step 1. 下載prisma_cloud_compute_edition_21_04_412.tar.gz
-https://drive.google.com/file/d/1a5nuIv-_LD2sjFLwgmmCFPslMbNvCgTn/view?usp=sharing
-`#提醒: 請先將image加入到私有倉`
+## RHACM
+[RHACM](https://hackmd.io/@williamtuuu/rJP4Gc-iY)
 
-### Step 2. 產生twistlock_console.yaml
-```
-#進到該資料夾
-linux/twistcli console export openshift \
-  --storage-class "prisma" \
-  --image-name "192.168.50.11/twistlock/console:console_21_04_412" \
-  --service-type "ClusterIP"
-```
-```
-#修改twistlock_console.yaml 加上imagepullsecret
-imagePullSecrets:
-- name: harbor-secret
-```
-```
-#建立imagePullSecrets yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: harbor-secret
-type: kubernetes.io/dockerconfigjson
-data:
-  .dockerconfigjson: eyJhdXRocyI6eyIxOTIuMTY4LjUwLjExIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6IkFkbWluMTIzNDUiLCJhdXRoIjoiWVdSdGFXNDZRV1J0YVc0eE1qTTBOUT09In19fQ==
-```
-```
-#建立PV yaml
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: twistlock-console
-  namespace: twistlock
-spec:
-  storageClassName: prisma
-  volumeMode: Filesystem
-  capacity:
-    storage: 100Gi       #指定大小
-  accessModes:
-  - ReadWriteOnce     #指定存取模式
-  persistentVolumeReclaimPolicy: Retain  
-  nfs:  #NFS的路徑以及IP位址
-    server: 192.168.50.11
-    path: /OCPNfs/prisma
-```
-
-### Step 3. 將step2的三隻yaml加入ocp
-```
-oc apply -f twistlock-PV.yml
-oc apply -f twistlock_console.yaml
-oc apply -f secret-harbor.yaml
-```
-
-### Step 4. 新增route
-```
-kind: Route
-apiVersion: route.openshift.io/v1
-metadata:
-  name: twistlock-console
-  namespace: twistlock
-  labels:
-    name: console
-spec:
-  host: twistlock-console.olg
-  to:
-    kind: Service
-    name: twistlock-console
-    weight: 100
-  port:
-    targetPort: management-port-https
-  tls:
-    termination: passthrough
-    insecureEdgeTerminationPolicy: Redirect
-  wildcardPolicy: None
-```
-
-### Step 5. 產生defender.yaml
-```
-#address: route的domain
-#cluster-address: service cluster ip
-linux/twistcli defender export openshift \
-  --address https://twistlock-console/ \
-  --cluster-address 192.168.50.6 \
-  --image-name "192.168.50.11/twistlock/defender:defender_21_04_412" \
-  --cri
-```
-```
-oc apply -f defender.yaml
-```
+## RHACS
+[RHACS](https://hackmd.io/@williamtuuu/r17X-XOY9)
 
 ## mirror ocp image
 ### 完整步驟
@@ -1025,7 +984,7 @@ $ oc adm release extract -a ${LOCAL_SECRET_JSON} --command=openshift-install "${
 ```
 
 #### 需加入到install-config.yaml的資訊
-```
+```yaml
 To use the new mirrored repository to install, add the following section to the install-config.yaml:
 
 imageContentSources:
