@@ -11,20 +11,32 @@
 | master node     |  3   |
 | compute node    |  3   |
 
+![](https://i.imgur.com/F0NzS0X.png)
 
 * 最低設備要求
-```
-bootstrap CPU: 4 core RAM: 16 G 
-master    CPU: 4 core RAM: 16 G 
-worker    CPU: 2 core RAM: 8 G 
-```
 
-* 設備要求
-```
-bootstrap CPU: 4 core RAM: 16 G 
-master    CPU: 8 core RAM: 24 G 
-worker    CPU: 8 core RAM: 24 G 
-```
+|      | bootstrap | master | worker |
+|:---- |:---------:|:------:|:------:|
+| CPU  |  4 core   | 4 core | 2 core |
+| RAM  |    16G    |  16G   |   8G   |
+| DISK |     -     |   -    |   -    |
+
+
+* 推薦設備要求
+
+|      | bootstrap | master | worker |
+|:---- |:---------:|:------:|:------:|
+| CPU  |  4 core   | 8 core | 8 core |
+| RAM  |    16G    |  24G   |  24G   |
+| DISK |     -     |  70G   |  70G   |
+
+* openshift LOGO 色票
+由淺到深
+<font color="#EB2126">#EB2126</font>
+<font color="#DB212E">#DB212E</font>
+<font color="#C22133">#C22133</font>
+<font color="#BA2133">#BA2133</font>
+<font color="#AD213B">#AD213B</font>
 
 ## -----建立bastion-----
 
@@ -244,7 +256,7 @@ ssh-add /root/.ssh/id_rsa
 ssh-add /root/.ssh/id_ed25519
 ```
 
-### 設定bashrc
+### ==**(option)**== 設定bashrc
 ```
 # oc command autocomplete
 source <(kubectl completion bash)
@@ -278,20 +290,15 @@ export KUBECONFIG=/root/ocp-data/auth/kubeconfig
 #解壓縮client
 tar zxvf /root/openshift-client-linux-4.5.6.tar.gz
 
-#查看目前 $PATH 變數 
-echo $PATH
-
 #移動解壓縮的檔案
 mv -f /root/oc /usr/local/bin
 mv -f /root/kubectl /usr/local/bin
-mv -f /root/README.md /usr/local/bin
 
 # 查看是否有移動成功
 ll /usr/local/bin
 > total 145572
 > -rwxr-xr-x 2 root root 74528312 Dec  5 11:12 kubectl
 > -rwxr-xr-x 2 root root 74528312 Dec  5 11:12 oc
-> -rw-r--r-- 1 root root      954 Dec  5 11:12 README.md
 
 #測試oc指令
 oc
@@ -308,7 +315,7 @@ tar zxvf /root/openshift-install-linux-4.5.6.tar.gz
 mkdir /root/ocp-data
 
 #創建OCP的安裝設定文件
-touch /root/ocp-data/install-config.yaml
+vi /root/ocp-data/install-config.yaml
 ```
 ```yaml
 #修改/root/ocp-data/install-config.yaml
@@ -357,7 +364,7 @@ sshKey: 'ssh-ed25519 AAAA...'
 #將mastersSchedulable 設為 False
 ```
 
-### hybrid networking with OVN-Kubernetes配置 (option)
+### ==**(option)**== hybrid networking with OVN-Kubernetes配置 
 ```
 #修改 /root/ocp-data/manifests/cluster-network-03-config.yml
 ```
@@ -511,6 +518,8 @@ watch -n5 oc get clusteroperators
 
 #調整Image Registry Operator
 oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"managementState":"Managed"}}'
+
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"emptyDir":{}}}}'
 ```
 
 ### 初始User設定
@@ -753,7 +762,6 @@ spec:
     customLogoFile:
       key: console-custom-logo.png
       name: console-custom-logo
-    customProductName: My Console
 ```
 
 ## -----安裝指令-----
@@ -763,60 +771,70 @@ spec:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.26:8080/bootstrap.ign 
-ip=192.168.50.101::192.168.50.253:255.255.255.0:bootstrap.ocp.neo.com:ens192:none 
-nameserver=192.168.50.26
+coreos.inst.image_url=http://192.168.50.200:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.200:8080/bootstrap.ign 
+ip=192.168.50.207::192.168.50.253:255.255.255.0:bootstrap.ocp.olg.com:ens192:none 
+nameserver=192.168.50.200
 ```
 
 #### master0:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.26:8080/master.ign 
-ip=192.168.50.102::192.168.50.253:255.255.255.0:master0.ocp.neo.com:ens192:none 
-nameserver=192.168.50.26
+coreos.inst.image_url=http://192.168.50.200:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.200:8080/master.ign 
+ip=192.168.50.201::192.168.50.253:255.255.255.0:master0.ocp.olg.com:ens192:none 
+nameserver=192.168.50.200
 ```
 
 #### master1:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.26:8080/master.ign 
-ip=192.168.50.103::192.168.50.253:255.255.255.0:master1.ocp.neo.com:ens192:none 
-nameserver=192.168.50.26
+coreos.inst.image_url=http://192.168.50.200:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.200:8080/master.ign 
+ip=192.168.50.202::192.168.50.253:255.255.255.0:master1.ocp.olg.com:ens192:none 
+nameserver=192.168.50.200
 ```
 
 #### master2:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.26:8080/master.ign 
-ip=192.168.50.104::192.168.50.253:255.255.255.0:master2.ocp.neo.com:ens192:none 
-nameserver=192.168.50.26
+coreos.inst.image_url=http://192.168.50.200:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.200:8080/master.ign 
+ip=192.168.50.203::192.168.50.253:255.255.255.0:master2.ocp.olg.com:ens192:none 
+nameserver=192.168.50.200
 ```
 
 #### compute0:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.26:8080/worker.ign 
-ip=192.168.50.105::192.168.50.253:255.255.255.0:compute0.ocp.olg.com:ens192:none 
-nameserver=192.168.50.26
+coreos.inst.image_url=http://192.168.50.200:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.200:8080/worker.ign 
+ip=192.168.50.204::192.168.50.253:255.255.255.0:compute0.ocp.olg.com:ens192:none 
+nameserver=192.168.50.200
 ```
 
 #### compute1:
 ```
 coreos.inst.install_dev=sda 
 coreos.inst.insecure=yes
-coreos.inst.image_url=http://192.168.50.26:8080/rhcos.raw.gz 
-coreos.inst.ignition_url=http://192.168.50.26:8080/worker.ign 
-ip=192.168.50.106::192.168.50.253:255.255.255.0:compute1.ocp.olg.com:ens192:none 
-nameserver=192.168.50.26
+coreos.inst.image_url=http://192.168.50.200:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.200:8080/worker.ign 
+ip=192.168.50.205::192.168.50.253:255.255.255.0:compute1.ocp.olg.com:ens192:none 
+nameserver=192.168.50.200
+```
+
+#### compute2:
+```
+coreos.inst.install_dev=sda 
+coreos.inst.insecure=yes
+coreos.inst.image_url=http://192.168.50.200:8080/rhcos.raw.gz 
+coreos.inst.ignition_url=http://192.168.50.200:8080/worker.ign 
+ip=192.168.50.206::192.168.50.253:255.255.255.0:compute2.ocp.olg.com:ens192:none 
+nameserver=192.168.50.200
 ```
 
 ### coreos-installer安裝參數
@@ -825,24 +843,24 @@ nameserver=192.168.50.26
 ```shell
 sudo coreos-installer install /dev/sda 
 --insecure --insecure-ignition -n
---ignition-url=http://192.168.50.6:8080/bootstrap.ign
---image-url=http://192.168.50.6:8080/rhcos.raw.gz 
+--ignition-url=http://192.168.50.200:8080/bootstrap.ign
+--image-url=http://192.168.50.200:8080/rhcos.raw.gz 
 ```
 
 #### master:
 ```shell
 sudo coreos-installer install /dev/sda 
 --insecure --insecure-ignition -n 
---ignition-url=http://192.168.50.6:8080/master.ign
---image-url=http://192.168.50.6:8080/rhcos.raw.gz 
+--ignition-url=http://192.168.50.200:8080/master.ign
+--image-url=http://192.168.50.200:8080/rhcos.raw.gz 
 ```
 
 #### compute:
 ```shell
 sudo coreos-installer install /dev/sda 
 --insecure --insecure-ignition -n
---ignition-url=http://192.168.50.6:8080/worker.ign
---image-url=http://192.168.50.6:8080/rhcos.raw.gz 
+--ignition-url=http://192.168.50.200:8080/worker.ign
+--image-url=http://192.168.50.200:8080/rhcos.raw.gz 
 ```
 
 ## -----特殊指令-----
@@ -878,10 +896,16 @@ $kubectl replace --raw "/api/v1/namespaces/[namespaces]/finalize" -f ./[namespac
 ![](https://i.imgur.com/nJYkJm1.png)
 
 ## RHACM
-[RHACM](https://hackmd.io/@williamtuuu/rJP4Gc-iY)
+[**RHACM**](https://hackmd.io/@williamtuuu/rJP4Gc-iY)
 
 ## RHACS
-[RHACS](https://hackmd.io/@williamtuuu/r17X-XOY9)
+[**RHACS**](https://hackmd.io/@williamtuuu/r17X-XOY9)
+
+## Portworx
+[**Portworx**](https://hackmd.io/@williamtuuu/HJeXkgSac)
+
+## ServiceMesh
+[**ServiceMesh**](https://hackmd.io/@williamtuuu/r1F8ANKNt)
 
 ## mirror ocp image
 ### 完整步驟
