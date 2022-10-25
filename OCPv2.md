@@ -31,7 +31,7 @@
 | DISK |     -     |  70G   |  70G   |
 
 * openshift LOGO 色票
-由淺到深
+![](https://i.imgur.com/WRNjfzS.png =150x150)
 <font color="#EB2126">#EB2126</font>
 <font color="#DB212E">#DB212E</font>
 <font color="#C22133">#C22133</font>
@@ -888,12 +888,13 @@ $vim [namespace].json
 $kubectl replace --raw "/api/v1/namespaces/[namespaces]/finalize" -f ./[namespaces].json
 ```
 
-
 ## Troubleshooting
+[Debugging Kubernetes Pods: Deep Dive](https://betterprogramming.pub/debugging-kubernetes-pods-deep-dive-d6b2814cd8ce)
 ![](https://i.imgur.com/UUh5FaM.png)
 ![](https://i.imgur.com/YdQ0Nan.png)
 ![](https://i.imgur.com/1TLcHiJ.png)
 ![](https://i.imgur.com/nJYkJm1.png)
+![](https://i.imgur.com/OOwlY8e.png)
 
 ## RHACM
 [**RHACM**](https://hackmd.io/@williamtuuu/rJP4Gc-iY)
