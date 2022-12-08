@@ -908,6 +908,9 @@ $kubectl replace --raw "/api/v1/namespaces/[namespaces]/finalize" -f ./[namespac
 ## ServiceMesh
 [**ServiceMesh**](https://hackmd.io/@williamtuuu/r1F8ANKNt)
 
+## 監控
+[**Grafana全家桶**](https://hackmd.io/@williamtuuu/rJo1B0Cwo)
+
 ## mirror ocp image
 ### 完整步驟
 #### step 1. Pull Secret設定
